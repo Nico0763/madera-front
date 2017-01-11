@@ -1,0 +1,52 @@
+<ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
+	<ion-content>
+		<div ng-hide="!indexPageCentralDiv" class='list ind__page__central--div row responsive-md'>
+		<br /><br />
+				<div style="height:100%">
+					<img src="main/assets/images/hopital_icon_1.png" style="padding-bottom: 10px;height:30%;padding-top:10px;">
+				</div>
+				<div>
+					<h1 translate="indexpage.title">Parcours en autonomie</h1>
+					<h3>ROUEN</h3>
+				</div>
+					<div class="row">
+						<div class="input--icon col">
+							<div class="input--icon-img"> <i class="icon ion-ios-unlocked  placeholder-icon"></i></div>
+						   
+						    <input class="input--icon-text" ng-model="user.code" type="text" name="code" placeholder="{{'indexpage.placeholder.code' | translate}}">
+						
+						 </div>
+
+						<div class="input--icon col">
+							<div class="input--icon-img"> <i class="fa fa-birthday-cake placeholder-icon"></i></div>
+							
+						    <input class="input--icon-text input--icon-date" type="date"  ng-model="user.birth" name="birth" placeholder="{{'indexpage.placeholder.birthdate' | translate}}">
+		  				</div>
+		  			</div>	
+		  			
+		  			<div class="row">
+						<div ng-repeat="elmt in tours" class="col">
+							<button class="btn--eqh btn--parcours" ng-click="vm.checkField(elmt.id, elmt.title)">
+								{{elmt.title}}
+							</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class='ind__page__alert col' ng-hide="!alertDiv" translate="indexpage.content.error">
+							Erreur dans la saisie des informations
+						</div>
+					</div>
+		</div>
+
+		<div ng-hide="!indexPagePopupDiv" class='list ind__page__popup'>
+			<div class='ind__page__popup__div'><!-- TODO REGARDE POUR LE SCOPE CHOICE QUI POSE PROBLEME TRANSLATE JSON  -->
+				<p class='ind__page__popup__div--cnt'>Vous venez de sélectionner le parcours {{choiceTitle}}. <br /> Êtes-vous certain ? </p> <!-- PROBLEME DE DIRECTIVE ET DE TRADUCTION  -->
+			</div>
+			<div class='ind__page__popup__div--btn'>
+				<button ng-click='vm.returnMenu()' class="btn--eqh-red" translate="indexpage.button.no">Non</button>
+				<button ng-click='vm.continueToGmap()' class="btn--eqh" style="height:61px;" translate="indexpage.button.yes">Oui</button>
+			</div>
+	</div>
+	</ion-content>
+</ion-view>
+

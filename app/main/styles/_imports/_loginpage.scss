@@ -1,0 +1,25 @@
+// LOGINPAGE SCSS
+
+.log__label--error
+{
+	color: #D91E18 !important;
+} 
+
+.login--container
+{
+	width:50%;
+	height:232px;
+	display:table;
+	margin:0 auto;
+	top: calc(50% - 168px);
+}
+
+.overflow-scroll {
+	background-color: #eaeaea;
+}
+
+.login--debug
+{
+	float:left;
+	position:absolute;
+}

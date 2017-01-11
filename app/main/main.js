@@ -7,7 +7,7 @@ angular.module('main', [
         'ngStorage',
         'ngResource',
         'ngCookies',
-        'ngAria',
+        'ngAria', 
         'ngCacheBuster', 
         'tmh.dynamicLocale',
         'pascalprecht.translate', 
@@ -17,7 +17,7 @@ angular.module('main', [
 .config(function ($stateProvider, $urlRouterProvider) {
 
     // ROUTING with ui.router
-    $urlRouterProvider.otherwise('/app/home');
+    $urlRouterProvider.otherwise('/app/loginpage');
     $stateProvider
     // this state is placed in the <ion-nav-view> in the index.html
         .state('app', {
