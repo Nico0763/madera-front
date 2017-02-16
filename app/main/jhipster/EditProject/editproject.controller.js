@@ -9,7 +9,7 @@
 	 * Function who inject module for Angular
 	 * @type {Array}
 	 */
-	EditProjectController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope','ParseLinks','$ionicConfig'];
+	EditProjectController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope','ParseLinks','$ionicConfig', 'Quotation', '$ionicLoading'];
 
 	/**
 	 * The index page controller 
@@ -27,7 +27,7 @@
 	 * @param {[type]} GetTours               GetTours service
 	 * @param {[type]} $ionicLoading          IonicLoading module
 	 */ 
-	function EditProjectController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope,  ParseLinks, $ionicConfig)
+	function EditProjectController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope,  ParseLinks, $ionicConfig, Quotation, $ionicLoading)
 	{
 		///////////////
 		// VARIABLES //
@@ -70,5 +70,20 @@
 		 */
 		var vm = this; 
         vm.quotation = $rootScope.quotation;
+        vm.saveQuotation = saveQuotation;
+
+        function saveQuotation()
+        {
+            $ionicLoading.show({
+              template: 'Loading...'
+            })
+
+            Quotation.update($rootScope.quotation,function (data)
+            {
+                $ionicLoading.hide();
+                $state.go('indexquotation');
+            });
+        }
+
 	}
 })();

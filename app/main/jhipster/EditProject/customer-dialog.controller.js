@@ -5,9 +5,9 @@
         .module('main')
         .controller('CustomerDialogController', CustomerDialogController);
 
-    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'searchCustomer', 'GetCustomers', '$ionicConfig', '$state','ParseLinks'];
+    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'searchCustomer', 'GetCustomers', '$ionicConfig', '$state','ParseLinks', 'Quotation', '$ionicLoading', '$rootScope'];
 
-    function CustomerDialogController ($timeout, $scope, $stateParams, DataUtils, searchCustomer, GetCustomers,  $ionicConfig, $state,ParseLinks) {
+    function CustomerDialogController ($timeout, $scope, $stateParams, DataUtils, searchCustomer, GetCustomers,  $ionicConfig, $state,ParseLinks, Quotation, $ionicLoading, $rootScope) {
         var vm = this;
          //A appeler dans les autre state pour réactiver la transition
         $ionicConfig.views.transition('none');
@@ -31,6 +31,7 @@
 
         vm.searchBox = $state.params.search;
         vm.stateSearch = $state.params.search;
+        vm.selectCustomer = selectCustomer;
 
         if($state.params.search=="" || $state.params.search == null)
             loadAll();
@@ -143,6 +144,21 @@
             $state.params.page=1;
             $state.params.search = null;
             vm.page = 1;
+        }
+        function selectCustomer(customer)
+        {
+           /* $ionicLoading.show({
+              template: 'Loading...'
+            })*/
+            $rootScope.quotation.customer = customer;
+            $state.go('editproject');
+            /*Quotation.update($rootScope.quotation,function (data)
+            {
+                $ionicLoading.hide();
+                $state.go('editproject');
+            });*/
+
+
         }
     }
 })();

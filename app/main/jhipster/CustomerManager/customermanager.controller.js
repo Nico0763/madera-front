@@ -27,7 +27,7 @@
 	 * @param {[type]} GetTours               GetTours service
 	 * @param {[type]} $ionicLoading          IonicLoading module
 	 */
-	function IndexPageController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, GetCustomers, ParseLinks, $ionicConfig, searchCustomer)
+	function CustomerManagerController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, GetCustomers, ParseLinks, $ionicConfig, searchCustomer)
 	{
 		///////////////
 		// VARIABLES //
