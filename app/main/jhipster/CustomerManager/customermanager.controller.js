@@ -9,7 +9,7 @@
 	 * Function who inject module for Angular
 	 * @type {Array}
 	 */
-	CustomerManagerController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'GetQuotations','ParseLinks','$ionicConfig','searchQuotation'];
+	CustomerManagerController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'GetCustomers','ParseLinks','$ionicConfig','searchCustomer'];
 
 	/**
 	 * The index page controller
@@ -27,7 +27,7 @@
 	 * @param {[type]} GetTours               GetTours service
 	 * @param {[type]} $ionicLoading          IonicLoading module
 	 */
-	function IndexPageController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, GetQuotations, ParseLinks, $ionicConfig, searchQuotation)
+	function IndexPageController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, GetCustomers, ParseLinks, $ionicConfig, searchCustomer)
 	{
 		///////////////
 		// VARIABLES //
@@ -58,7 +58,7 @@
 
         vm.searchBox = $state.params.search;
         vm.stateSearch = $state.params.search;
-        vm.editQuotation = editQuotation;
+        vm.editCustomer = editCustomer;
 
         if($state.params.search=="" || $state.params.search == null)
             loadAll();
@@ -74,7 +74,7 @@
             return numbers;
         }
         function loadAll () {
-           GetQuotations.query({
+           GetCustomers.query({
                 page: $state.params.page - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
@@ -129,7 +129,7 @@
            if(search!="" && search != null)
            {
 
-             searchQuotation.query({
+             searchCustomer.query({
                 critere: search,
                 page:  $state.params.page - 1,
                 size: vm.itemsPerPage,
@@ -175,10 +175,10 @@
 
         /*** Actions sur le devis ***/
 
-        function editQuotation(quot)
+        function editCustomer(customer)
         {
-             $rootScope.quotation =  quot;
-             $state.go('indexquotation', {reload:true});
+             $rootScope.customer =  customer;
+             $state.go('editcustomer', {reload:true});
         }
 
 
