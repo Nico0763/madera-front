@@ -22,7 +22,7 @@
                                 <thead>
                                     <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                                         <th jh-sort-by="reference"><span>Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
-                                        <th><span>Prénnom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                        <th><span>Prénom</span> <span class="glyphicon glyphicon-sort"></span></th>
                                         <th><span>Adresse</span> <span class="glyphicon glyphicon-sort"></span></th>
                                         <th></th>
                                        
@@ -31,14 +31,14 @@
                                 <tbody>
                                     <tr ng-repeat="customer in vm.customers track by customer.id">
                                         <td>{{customer.name}}</td>
-                                        <td>{{customer.surname}}</td>
-                                        <td>{{customer.address}}</td>
+                                        <td>{{customer.firstname}}</td>
+                                        <td>{{customer.address}} {{customer.pc}}, {{customer.city}} </td>
                                        
                                         <td class="text-right">
                                             <div class="btn-group flex-btn-group-container">
                                                 <button type="submit"
                                                         ng-click="vm.editQuotation(quotation)"
-                                                        class="edit btn-edit">
+                                                        class="edit btn-edit" style="min-width:100px">
                                                     <span class="hidden-xs hidden-sm">Sélectionner</span>
                                                 </button>
                                             
@@ -48,6 +48,15 @@
                                 </tbody>
                             </table>
                             </div>
+                             <div class="text-center row--pagination">
+
+                                <div class="page--nb" ng-repeat="number in getNumber(vm.nbPages)" ng-class="{'page--nb-current':number == vm.page }" nav-transition="none" ui-transition='none' ui-sref="choosecustomer({page:number,search:vm.stateSearch})" >
+                                    <span >{{number}}</span>
+                                </div>
+
+                            </div>
+                    </div>
+                </div>
 
 
     </ion-content>
