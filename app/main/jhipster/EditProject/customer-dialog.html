@@ -1,0 +1,55 @@
+<ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
+    <ion-content>
+            <div class="main-title">Choisir un client</div>
+            <div class="return"><button ui-sref="editproject" class="btn btn--red btn--return">Retour</div>
+                <!--<div class="row text-center">
+                    <div>
+                        <h1>Choix du devis</h1>
+                        <h3>MADERA</h3>
+                    </div>
+                </div>-->
+                <jhi-alert-error></jhi-alert-error>
+                <div class="row">
+                        <div class="col col-80 col-offset-10">
+                            <input type="text" class="input--text input--search" ng-model="vm.searchBox" /><button class="btn btn--search" ui-sref="choosecustomer({page:1,search:vm.searchBox})">Search</button>
+                        </div>
+                    </div>
+                <div class="row">
+                        <div class="col col-80 col-offset-10">
+
+                        <div class="table-responsive">
+                             <table class="index-table">
+                                <thead>
+                                    <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                                        <th jh-sort-by="reference"><span>Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                        <th><span>Prénnom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                        <th><span>Adresse</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                        <th></th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="customer in vm.customers track by customer.id">
+                                        <td>{{customer.name}}</td>
+                                        <td>{{customer.surname}}</td>
+                                        <td>{{customer.address}}</td>
+                                       
+                                        <td class="text-right">
+                                            <div class="btn-group flex-btn-group-container">
+                                                <button type="submit"
+                                                        ng-click="vm.editQuotation(quotation)"
+                                                        class="edit btn-edit">
+                                                    <span class="hidden-xs hidden-sm">Sélectionner</span>
+                                                </button>
+                                            
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+
+
+    </ion-content>
+</ion-view>
+

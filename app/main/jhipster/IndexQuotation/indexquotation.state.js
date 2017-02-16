@@ -18,7 +18,7 @@
 			{
 				parent: 'app',
 				url: '/indexquotation',
-				
+				cache:false,
 				data:
 				{
 					authorities: ['ROLE_USER'],

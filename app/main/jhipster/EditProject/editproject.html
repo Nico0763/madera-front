@@ -8,84 +8,118 @@
 						<h3>MADERA</h3>
 					</div>
 				</div>-->
-				
-					<div class="row">
-						<div class="col col-80 col-offset-10">
-							<input type="text" class="input--text input--search" ng-model="vm.searchBox" /><button class="btn btn--search" ui-sref="indexpage({page:1,search:vm.searchBox})">Search</button>
-						</div>
-					</div>
-				<div class="row">
-						<div class="col col-80 col-offset-10">
+				<jhi-alert-error></jhi-alert-error>
 
-						<div class="table-responsive">
-							 <table class="index-table">
-					            <thead>
-					                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-					                    <th jh-sort-by="reference"><span>Référence</span> <span class="glyphicon glyphicon-sort"></span></th>
-					                    <th><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-					                    <th><span>Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
-					                    <th><span>State</span> <span class="glyphicon glyphicon-sort"></span></th>
-					                    <th></th>
-					                   
-					                </tr>
-					            </thead>
-					            <tbody>
-					                <tr ng-repeat="quotation in vm.quotations track by quotation.id">
-					                    <td>{{quotation.reference}}</td>
-					                    <td>{{quotation.date}}</td>
-					                    <td>{{quotation.name}}</td>
-					                    <td>{{quotation.state}}</td>
-					                   
-					                    <td class="text-right">
-					                        <div class="btn-group flex-btn-group-container">
-					                            <button type="submit"
-					                            		ng-click="vm.editQuotation(quotation)"
-					                                    class="edit btn-edit">
-					                                <span class="hidden-xs hidden-sm">Editer</span>
-					                            </button>
-					                            <button type="submit"
-					                                    ui-sref="madera-admin.composants-configuration.delete({id:composant.id})"
-					                                    class="delete btn-delete">
-					                                <span class="hidden-xs hidden-sm">-</span>
-					                            </button>
-					                        </div>
-					                    </td>
-					                </tr>
-					            </tbody>
-					        </table>
+				<div class="row">
+					    <label class="control-label label--form col col-25 col-offset-25" for="field_customer">Client</label>
+					    <div class="col col-25">
+					    		<label>{{vm.quotation.customer.name}}</label>
+								<button ui-sref="choosecustomer" class="btn btn--default" >Choisir un client</button>
+					    </div>
+				</div>
+
+
+				<div class="row">
+					    <label class="control-label label--form col col-25 col-offset-25" for="field_name">Nom</label>
+					    <div class="col col-25">
+					            <input type="text" class="form-control input--form" name="name" id="field_name"
+					                    ng-model="vm.quotation.name"
+					                    ng-maxlength="50" />
+					            <div ng-show="editForm.name.$invalid">
+					                <p class="help-block"
+					                    ng-show="editForm.name.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="50">
+					                    This field cannot be longer than 50 characters.
+					                </p>
+					            </div>
+					    </div>
+				</div>
+
+				<div class="row">
+					    <label class="control-label label--form col col-25 col-offset-25" for="field_date">Date</label>
+					    <div class="col col-25">
+								    <input class="form-control input--form" type="date"  ng-model="vm.quotation.date" name="date">
+					    </div>
+				</div>
+
+				<div class="row">
+					    <label class="control-label label--form col col-25 col-offset-25" for="field_date">État</label>
+					    <div class="col col-25">
+								<select 
+								class="form-control input--form"
+								ng-model="vm.quotation.state"
+								    ng-options="state.value as state.label for state in states">
+								</select>
+					    </div>
+				</div>
+
+				<div class="row">
+					    <label class="control-label label--form col col-25 col-offset-25" for="field_gamme">Gamme</label>
+					    <div class="col col-25">
+								<button ng-click="vm.chooseGamme()" class="btn btn--default" >Choisir une gamme</button>
+					    </div>
+				</div>
+
+
+
+
+
+
+				
+
+
+					       <!-- <div class="form-group" ngf-drop ngf-change="vm.setSkeleton_conception_mode($file, vm.assortment)">
+					            <label class="control-label" data-translate="maderaApp.assortment.skeleton_conception_mode" for="field_skeleton_conception_mode">Skeleton Conception Mode</label>
+					            <div>
+					                <div ng-if="vm.assortment.skeleton_conception_mode" class="help-block clearfix">
+					                    <a class="pull-left" ng-click="vm.openFile(vm.assortment.skeleton_conception_modeContentType, vm.assortment.skeleton_conception_mode)" data-translate="entity.action.open">open</a><br>
+					                    <span class="pull-left">{{vm.assortment.skeleton_conception_modeContentType}}, {{vm.byteSize(vm.assortment.skeleton_conception_mode)}}</span>
+					                    <button type="button" ng-click="vm.assortment.skeleton_conception_mode=null;vm.assortment.skeleton_conception_modeContentType=null;"
+					                            class="btn btn-default btn-xs pull-right">
+					                        <span class="glyphicon glyphicon-remove"></span>
+					                    </button>
+					                </div>
+					                <button type="button" ngf-select class="btn btn-default btn-block"
+					                        ngf-change="vm.setSkeleton_conception_mode($file, vm.assortment)" data-translate="entity.action.addblob">
+					                    Add blob
+					                </button>
+					            </div>
+					            <input type="hidden" class="form-control" name="skeleton_conception_mode" id="field_skeleton_conception_mode"
+					                    ng-model="vm.assortment.skeleton_conception_mode"
+					                     />
+					            <input type="hidden" class="form-control" name="skeleton_conception_modeContentType" id="field_skeleton_conception_modeContentType"
+					                    ng-model="vm.assortment.skeleton_conception_modeContentType" />
 					        </div>
 
-
-							
-					        <div class="text-center row--pagination">
-
-								<div class="page--nb" ng-repeat="number in getNumber(vm.nbPages)" ng-class="{'page--nb-current':number == vm.page }" nav-transition="none" ui-transition='none' ui-sref="indexpage({page:number,search:vm.stateSearch})" >
-									<span >{{number}}</span>
-								</div>
-							 
-						    </div>
+					        <div class="form-group">
+					            <label data-translate="maderaApp.assortment.finition_ext" for="field_finition_ext">Finition Ext</label>
+					            <select class="form-control" id="field_finition_ext" name="finition_ext" ng-model="vm.assortment.finition_ext" ng-options="finition_ext as finition_ext.name for finition_ext in vm.finition_exts track by finition_ext.id">
+					                <option value=""></option>
+					            </select>
+					        </div>
+					        <div class="form-group">
+					            <label data-translate="maderaApp.assortment.insulating_type" for="field_insulating_type">Insulating Type</label>
+					            <select class="form-control" id="field_insulating_type" name="insulating_type" ng-model="vm.assortment.insulating_type" ng-options="insulating_type as insulating_type.name for insulating_type in vm.insulating_types track by insulating_type.id">
+					                <option value=""></option>
+					            </select>
+					        </div>
+					        <div class="form-group">
+					            <label data-translate="maderaApp.assortment.frame" for="field_frame">Frame</label>
+					            <select class="form-control" id="field_frame" name="frame" ng-model="vm.assortment.frame" ng-options="frame as frame.name for frame in vm.frames track by frame.id">
+					                <option value=""></option>
+					            </select>
+					        </div>
+					        <div class="form-group">
+					            <label data-translate="maderaApp.assortment.cover_type" for="field_cover_type">Cover Type</label>
+					            <select class="form-control" id="field_cover_type" name="cover_type" ng-model="vm.assortment.cover_type" ng-options="cover_type as cover_type.name for cover_type in vm.cover_types track by cover_type.id">
+					                <option value=""></option>
+					            </select>
+					        </div>-->
+					  
 
 						    
 
 		  				</div>
 		  			</div>
-
-		  			<div class="row">
-		  				<div class="col col-50 col-offset-25">
-		  					<button ng-click="vm.connect()" class="btn btn--default" style="margin-top: 10px;">Ajouter un devis</button>
-		  				</div>
-		  			</div>
-
-
-
-		  			<div class="row">
-		  				<div class="col col-80 col-offset-10">
-		  					<button ng-click="vm.connect()" class="btn btn--default" style="margin-top: 10px;">Gestion des clients</button>
-		  				</div>
-		  			</div>
-		  			
-
-		
 	</ion-content>
 </ion-view>
 

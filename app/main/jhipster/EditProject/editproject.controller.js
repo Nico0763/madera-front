@@ -42,6 +42,28 @@
 		// Controller variables //
 		//////////////////////////
 
+
+        $scope.states = [{
+        value: 1,
+        label: 'Brouillon'
+      }, {
+        value: 2,
+        label: 'Accepté'
+      }, {
+        value: 3,
+        label: 'En attente'
+      }, {
+        value: 4,
+        label: 'Refusé'
+      }, {
+        value: 5,
+        label: 'En commande'
+      }, {
+        value: 6,
+        label: 'Transfert en facturation'
+      }];
+
+
 		/**
 		 * The controller reference 
 		 * @type {Object}

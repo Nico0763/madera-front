@@ -47,6 +47,7 @@
 		 * @type {Object}
 		 */
 		var vm = this;
+		console.debug($rootScope.quotation);
         vm.quotation = $rootScope.quotation;
 
         vm.goBack = goBack;

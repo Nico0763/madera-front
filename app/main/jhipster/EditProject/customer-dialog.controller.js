@@ -1,64 +1,36 @@
-(function()
-{
-	'use strict';
-	angular
-		.module('main')
-		.controller('IndexPageController', IndexPageController);
+(function() {
+    'use strict';
 
-	/**
-	 * Function who inject module for Angular
-	 * @type {Array}
-	 */
-	IndexPageController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'GetQuotations','ParseLinks','$ionicConfig','searchQuotation'];
+    angular
+        .module('main')
+        .controller('CustomerDialogController', CustomerDialogController);
 
-	/**
-	 * The index page controller 
-	 * @param {[type]} $scope                 Scope module
-	 * @param {[type]} $filter                Filter module
-	 * @param {[type]} Principal              Principal module
-	 * @param {[type]} $state                 State module 
-	 * @param {[type]} $location              Location module
-	 * @param {[type]} $ionicNavBarDelegate   IonicNavBarDelegate module
-	 * @param {[type]} Config                 Config module
-	 * @param {[type]} $ionicSideMenuDelegate IonicSideMenuDelegate module
-	 * @param {[type]} $rootScope             RootScope module
-	 * @param {[type]} PostSession            PostSession service
-	 * @param {[type]} GetTour                GetTour service
-	 * @param {[type]} GetTours               GetTours service
-	 * @param {[type]} $ionicLoading          IonicLoading module
-	 */ 
-	function IndexPageController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, GetQuotations, ParseLinks, $ionicConfig, searchQuotation)
-	{
-		///////////////
-		// VARIABLES //
-		///////////////
+    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'searchCustomer', 'GetCustomers', '$ionicConfig', '$state','ParseLinks'];
 
-
-
-        //A appeler dans les autre state pour réactiver la transition
+    function CustomerDialogController ($timeout, $scope, $stateParams, DataUtils, searchCustomer, GetCustomers,  $ionicConfig, $state,ParseLinks) {
+        var vm = this;
+         //A appeler dans les autre state pour réactiver la transition
         $ionicConfig.views.transition('none');
 
-		//////////////////////////
-		// Controller variables //
-		//////////////////////////
+        //////////////////////////
+        // Controller variables //
+        //////////////////////////
 
-		/**
-		 * The controller reference 
-		 * @type {Object}
-		 */
-		var vm = this; 
-		vm.loadPage = loadPage;
+        /**
+         * The controller reference 
+         * @type {Object}
+         */
+        vm.loadPage = loadPage;
         vm.predicate = 'id';
         vm.reverse = 'asc';
         vm.transition = transition;
-        vm.itemsPerPage = 3;
+        vm.itemsPerPage = 6;
         vm.search = search;
         vm.resetpage = resetPage;
         vm.nbPages = 1;
 
         vm.searchBox = $state.params.search;
         vm.stateSearch = $state.params.search;
-        vm.editQuotation = editQuotation;
 
         if($state.params.search=="" || $state.params.search == null)
             loadAll();
@@ -74,7 +46,7 @@
             return numbers;  
         }
         function loadAll () {
-           GetQuotations.query({
+           GetCustomers.query({
                 page: $state.params.page - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
@@ -90,7 +62,7 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.quotations = data;
+                vm.customers = data;
                 vm.page = $state.params.page;
                 vm.nbPages = Math.ceil(vm.queryCount/vm.itemsPerPage);
             }
@@ -129,7 +101,7 @@
            if(search!="" && search != null)
            {
 
-             searchQuotation.query({
+             searchCustomer.query({
                 critere: search,
                 page:  $state.params.page - 1,
                 size: vm.itemsPerPage,
@@ -157,7 +129,7 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.quotations = data;
+                vm.customers = data;
                 vm.page = $state.params.page;
                 vm.nbPages = Math.ceil(vm.queryCount/vm.itemsPerPage);
             }
@@ -172,17 +144,5 @@
             $state.params.search = null;
             vm.page = 1;
         }
-
-        /*** Actions sur le devis ***/
-
-        function editQuotation(quot)
-        {
-             $rootScope.quotation =  quot;
-             $state.go('indexquotation', {reload:true});
-        }
-
-
-		
-			
-	}
+    }
 })();
