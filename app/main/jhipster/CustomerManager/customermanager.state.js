@@ -14,16 +14,27 @@
 	 */
 	function stateConfig($stateProvider)
 	{
-		$stateProvider.state('cutomermanager',
+		$stateProvider.state('customermanager',
 			{
 				parent: 'app',
-				url: '/cutomermanager',
+				url: '/customermanager',
 
 				data:
 				{
 					authorities: ['ROLE_USER'],
 					pageTitle: 'global.menu.gmaptour'
 				},
+        params: {
+          page: {
+              value: '1',
+              squash: true
+          },
+          sort: {
+              value: 'id,asc',
+              squash: true
+          },
+          search: null
+        },
 				views:
 				{
 					'pageContent':
