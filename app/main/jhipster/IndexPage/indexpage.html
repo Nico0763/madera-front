@@ -7,7 +7,7 @@
 						<h3>MADERA</h3>
 					</div>
 				</div>-->
-				
+
 					<div class="row">
 						<div class="col col-80 col-offset-10">
 							<input type="text" class="input--text input--search" ng-model="vm.searchBox" /><button class="btn btn--search" ui-sref="indexpage({page:1,search:vm.searchBox})">Search</button>
@@ -25,7 +25,7 @@
 					                    <th><span>Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
 					                    <th><span>State</span> <span class="glyphicon glyphicon-sort"></span></th>
 					                    <th></th>
-					                   
+
 					                </tr>
 					            </thead>
 					            <tbody>
@@ -34,7 +34,7 @@
 					                    <td>{{quotation.date}}</td>
 					                    <td>{{quotation.name}}</td>
 					                    <td>{{quotation.state}}</td>
-					                   
+
 					                    <td class="text-right">
 					                        <div class="btn-group flex-btn-group-container">
 					                            <button type="submit"
@@ -55,16 +55,16 @@
 					        </div>
 
 
-							
+
 					        <div class="text-center row--pagination">
 
 								<div class="page--nb" ng-repeat="number in getNumber(vm.nbPages)" ng-class="{'page--nb-current':number == vm.page }" nav-transition="none" ui-transition='none' ui-sref="indexpage({page:number,search:vm.stateSearch})" >
 									<span >{{number}}</span>
 								</div>
-							 
+
 						    </div>
 
-						    
+
 
 		  				</div>
 		  			</div>
@@ -79,12 +79,11 @@
 
 		  			<div class="row">
 		  				<div class="col col-80 col-offset-10">
-		  					<button ng-click="vm.connect()" class="btn btn--default" style="margin-top: 10px;">Gestion des clients</button>
+		  					<button ui-sref="customermanager" class="btn btn--default" style="margin-top: 10px;">Gestion des clients</button>
 		  				</div>
 		  			</div>
-		  			
 
-		
+
+
 	</ion-content>
 </ion-view>
-

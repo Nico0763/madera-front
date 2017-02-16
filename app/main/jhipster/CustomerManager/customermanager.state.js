@@ -28,7 +28,7 @@
 				{
 					'pageContent':
 					{
-						templateUrl: 'main/jhipster/CustomerManager/cutomermanager.html',
+						templateUrl: 'main/jhipster/CustomerManager/customermanager.html',
 						controller: 'CustomerManagerController',
 						controllerAs: 'vm'
 					}
