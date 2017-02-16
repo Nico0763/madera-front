@@ -1,4 +1,10 @@
+ @import "_variables.scss";
+@import "_imports/loginpage";
+@import "_imports/indexpage";
 
+@import "_imports/_components/inputs";
+@import "_imports/_components/buttons";
+@import "_imports/_components/titles";
 
 /* start Password strength bar style */
 ul#strength {
@@ -26,19 +32,7 @@ ul#strength {
     background-color: lightgrey;
 }
 
-.col{
-    border: solid 1px grey;
-    border-bottom-style: none;
-    border-right-style: none;
-}
 
-.col:last-child{
-    border-right: solid 1px grey;
-}
-
-.row:last-child .col{
-    border-bottom: solid 1px grey;
-}
 
 .hidden{
     display: none;

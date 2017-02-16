@@ -1,0 +1,9 @@
+{
+	"loginpage":
+	{
+		"password" : "Password",
+		"login" : "Login",
+		"connectbutton" : "Connect",
+		"errorlabel" : "Password and/or Login error(s)"
+	}
+}

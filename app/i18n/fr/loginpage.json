@@ -1,0 +1,9 @@
+{
+	"loginpage":
+	{
+		"password" : "Mot de passe",
+		"login" : "Identifiant",
+		"connectbutton" : "Se connecter",
+		"errorlabel" : "Erreur de saisie pour le login et/ou le mot de passe"
+	}
+}

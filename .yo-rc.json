@@ -50,6 +50,7 @@
       "fr",
       "en"
     ],
-    "jhipsterHome": "../back"
+    "jhipsterHome": "../back",
+    "herokuAppName": "maderaapp"
   }
 }

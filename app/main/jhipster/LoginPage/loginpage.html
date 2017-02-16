@@ -1,0 +1,33 @@
+<ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.loginpage' | translate }}">
+	<ion-content>
+		 	<div class="main-title">Conception des devis</div>
+			<div class="list login--container">
+			  
+
+			     
+				    <!--<i class="icon ion-search placeholder-icon"></i>-->
+				    <input class="input--text" type="text" placeholder="Nom d'utilisateur" ng-model="admin.login">
+
+				  
+			  
+
+
+				<input class="input--text" type="password" placeholder="Mot de passe" ng-model="admin.password">
+
+
+			    
+
+
+			    
+  <!--<button ng-click="admin.login = 'admin'; admin.password='/Gamit2016/'; vm.connect()" class="btn--eqh" style="margin-top: 10px;">Debug</button>-->
+			  <button ng-click="vm.connect()" class="btn btn--connect" translate="loginpage.connectbutton" style="margin-top: 10px;">Se connecter</button>
+			  <button ng-click="vm.debug()">Debug</button>
+			  <label ng-hide="!isErrorVisible" class=" item item-input item-stacked-label">
+			  	<span class="log__label--error" translate="loginpage.errorlabel">Erreur de saisie pour le login et/ou le mot de passe</span>
+			  </label>
+			  <label ng-hide="!isNetworkVisible" class=" item item-input item-stacked-label">
+			  	<span class="log__label--error">Vous n'avez pas d'accès à une connexion</span>
+			  </label>
+			</div>
+	</ion-content>
+</ion-view>
