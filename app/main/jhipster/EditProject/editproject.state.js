@@ -43,6 +43,7 @@
 		 .state('choosecustomer', {
             parent: 'app',
             url: '/editproject/customer',
+            cache:false,
 				data:
 				{
 					authorities: ['ROLE_USER'],
