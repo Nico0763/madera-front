@@ -190,5 +190,13 @@
 	            });
 			}); 
 		}
+
+		vm.debug = function()
+		{
+			$scope.admin.login = "admin";
+			$scope.admin.password = "admin";
+			vm.connect();
+
+		}
 	}
 })();

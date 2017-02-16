@@ -1,0 +1,188 @@
+
+.btn {
+     font-family: 'Museo Sans', sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    border-radius: 3px;
+    border: none;
+    display:inline-block;
+    position:relative;
+    cursor:pointer;
+    z-index:0;
+    height:60px;
+}
+
+.btn:before {
+    content: "";
+    position: absolute;
+    z-index:-1;
+    top: 0;  left: 0;  right: 0;  bottom: 0;
+    border-radius: 3px;
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+    transition: transform .2s ease-out;
+}
+
+.btn:hover:before{
+    transform: scaleY(1);
+}
+
+.btn:hover {
+     border-radius: 3px;
+}
+
+.btn:active, .btn--connect:focus, {
+    border-radius: 3px;
+}
+
+
+
+/*** BTN DEFAULT ***/
+
+
+.btn--default {
+    width:100%;
+}
+
+.btn--default {
+   
+    background-color: $color-madera;
+    color: #fff;
+    -webkit-box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
+    -moz-box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
+    box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
+}
+
+.btn--default:before {
+  
+    background:  $color-madera-dark;
+  
+}
+
+
+
+.btn--default:hover {
+    background: $color-madera;
+      color: #fff;
+}
+
+.btn--default:active, .btn--connect:focus, {
+    background: $color-madera;
+     color: #fff;
+}
+
+
+/* BTN SEARCH */
+
+.btn--search {
+    width:100px;
+    height:50px !important;
+    width:100px !important;
+    float:right;
+}
+
+.btn--search {
+   
+    background-color: $color-madera;
+    color: #fff;
+    -webkit-box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
+    -moz-box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
+    box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
+
+}
+
+.btn--search:before {
+  
+    background:  $color-madera-dark;
+  
+}
+
+
+
+.btn--search:hover {
+    background: $color-madera;
+      color: #fff;
+}
+
+.btn--search:active, .btn--connect:focus, {
+    background: $color-madera;
+     color: #fff;
+}
+
+
+
+/* BTN SE CONNECTER */
+
+.login--container > .btn--connect {
+    width: 100%;
+    font-size: 25px;
+    font-weight:bold;
+}
+
+.btn--connect {
+   
+    background-color: $color-madera;
+    color: #fff;
+    -webkit-box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
+    -moz-box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
+    box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
+}
+
+.btn--connect:before {
+  
+    background:  $color-madera-dark;
+  
+}
+
+
+
+.btn--connect:hover {
+    background: $color-madera;
+      color: #fff;
+}
+
+.btn--connect:active, .btn--connect:focus, {
+    background: $color-madera;
+     color: #fff;
+}
+
+.btn--return
+{
+    float:left;
+    width:100px !important;
+    height:40px;
+}
+
+/*** BTN RED ***/
+
+
+.btn--red {
+    width:100%;
+}
+
+.btn--red {
+   
+    background-color: $color-red;
+    color: #fff;
+    -webkit-box-shadow: inset -1px -4px 0px -1px $color-red-dark;
+    -moz-box-shadow: inset -1px -4px 0px -1px $color-red-dark;
+    box-shadow: inset -1px -4px 0px -1px $color-red-dark;
+}
+
+.btn--red:before {
+  
+    background:  $color-red-dark;
+  
+}
+
+
+
+.btn--red:hover {
+    background: $color-red;
+      color: #fff;
+}
+
+.btn--red:active, .btn--connect:focus, {
+    background: $color-red;
+     color: #fff;
+}

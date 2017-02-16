@@ -1,0 +1,81 @@
+.index-table
+{
+width:100%;
+	th
+	{
+		color:white;
+		font-weight:bold;
+		font-size:15px;
+		min-width:100px;
+		height:50px;
+		background-color:$background-color-header-table;
+		
+		line-height:50px;
+
+
+		border-style: solid;
+   		border-width: 1px;
+	}
+	td{
+		color:$background-color-header-table;
+		border-color:$background-color-header-table;
+		height:40px;
+		border-style: solid;
+   		border-width: 1px;
+   		line-height:40px;
+   		text-align:center;
+   		font-size:13px;
+	}
+	.edit
+	{
+		width:calc(100% - 44px);
+		height:40px;
+	}
+	.delete
+	{
+		width:40px;
+		height:40px;
+	}
+}
+
+
+.btn-edit
+{
+	/*line-height:100%;*/
+	font-weight:bold;
+	background-color:$background-color-header-table;
+	color:white;
+	border:none;
+}
+.btn-delete
+{
+	/*line-height:100%:*/
+	font-weight:bold;
+	background-color:red;
+	color:white;
+	border:none;
+}
+
+.page--nb
+{
+	background-color:$color-madera; 
+	color:white;
+	width:40px;
+	height:40px;
+	display:inline-block;
+	font-size:19px;
+	font-weight:bold;
+	margin-right:2px;
+	margin-left:2px;
+	line-height:40px;
+}
+
+.page--nb-current
+{
+	background-color:$color-madera-dark !important;
+}
+
+.row--pagination
+{
+	margin-top:10px;
+}

@@ -1,0 +1,40 @@
+.input--text{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100% !important;
+    height: 54px !important;
+    padding-top: 0px !important;
+    padding-left: 20px !important;
+    border-radius: 3px;
+    color: $color-madera-dark !important;
+    line-height: 16px;
+    font-size: 22px !important;
+    font-family: 'Museo Sans', sans-serif !important;
+}
+
+.input--text:focus {
+	-webkit-box-shadow: inset 0px 0px 0px 3px $color-madera;
+	-moz-box-shadow: inset 0px 0px 0px 3px $color-madera;
+	box-shadow: inset 0px 0px 0px 3px $color-madera;
+}
+
+.input--label
+{
+	font-family: 'Museo Sans', sans-serif;
+    color: #2f4050;
+    width: 100%;
+    display: table;
+    margin: 0 auto;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.input--search
+{
+    width:calc(100% - 100px) !important;
+    display:inline-block !important;
+    margin-top:0px !important;
+    margin-bottom: 0px !important;
+}
