@@ -5,9 +5,9 @@
         .module('main')
         .controller('CustomerDialogController', CustomerDialogController);
 
-    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'searchCustomer', 'GetCustomers', '$ionicConfig', '$state','ParseLinks', 'Quotation', '$ionicLoading', '$rootScope'];
+    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'searchCustomer', 'GetCustomers', '$ionicConfig', '$state','ParseLinks', 'Quotation', '$ionicLoading', '$rootScope', '$uibModalInstance'];
 
-    function CustomerDialogController ($timeout, $scope, $stateParams, DataUtils, searchCustomer, GetCustomers,  $ionicConfig, $state,ParseLinks, Quotation, $ionicLoading, $rootScope) {
+    function CustomerDialogController ($timeout, $scope, $stateParams, DataUtils, searchCustomer, GetCustomers,  $ionicConfig, $state,ParseLinks, Quotation, $ionicLoading, $rootScope, $uibModalInstance) {
         var vm = this;
          //A appeler dans les autre state pour réactiver la transition
         $ionicConfig.views.transition('none');
@@ -32,6 +32,9 @@
         vm.searchBox = $state.params.search;
         vm.stateSearch = $state.params.search;
         vm.selectCustomer = selectCustomer;
+        vm.goBack = goBack;
+        vm.goSearch = goSearch;
+
 
         if($state.params.search=="" || $state.params.search == null)
             loadAll();
@@ -47,11 +50,14 @@
             return numbers;  
         }
         function loadAll () {
+
+           
            GetCustomers.query({
                 page: $state.params.page - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
             }, onSuccess, onError);
+            
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
@@ -92,7 +98,7 @@
          /*** Recherche ***/
         function search()
         {
-
+            console.log("search");
 
            var search = $state.params.search;
 
@@ -102,6 +108,8 @@
            if(search!="" && search != null)
            {
 
+
+
              searchCustomer.query({
                 critere: search,
                 page:  $state.params.page - 1,
@@ -109,21 +117,22 @@
                 sort: sort()
             },onSuccess, onError);
 
-             function sort() {
-                var result = [vm.predicate + ',' + (vm.reverse ? 'desc' : 'asc')];
-                if (vm.predicate !== 'id') {
-                    result.push('id');
-                }
-                return result;
-            }
+            
            }
-           else
+           else 
            {
             resetPage();
             loadAll();
            }
             
 
+            function sort() {
+                var result = [vm.predicate + ',' + (vm.reverse ? 'desc' : 'asc')];
+                if (vm.predicate !== 'id') {
+                    result.push('id');
+                }
+                return result;
+            }
             function onSuccess(data, headers) {
                // console.log(headers('link'));
                 vm.currentSearch = search;
@@ -147,18 +156,24 @@
         }
         function selectCustomer(customer)
         {
-           /* $ionicLoading.show({
-              template: 'Loading...'
-            })*/
-            $rootScope.quotation.customer = customer;
-            $state.go('editproject');
-            /*Quotation.update($rootScope.quotation,function (data)
-            {
-                $ionicLoading.hide();
-                $state.go('editproject');
-            });*/
+            console.debug($scope.$parent);
+             $rootScope.$emit('chooseCustomer', customer);
 
-
+            $uibModalInstance.close({c:customer});
         }
+
+        function goBack()
+        {
+             $uibModalInstance.close();
+        }
+
+        function goSearch()
+        {
+             
+             $state.go("choosecustomer", {page:1,search:vm.searchBox});
+             $uibModalInstance.close();
+        }
+
+      
     }
 })();

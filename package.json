@@ -65,5 +65,8 @@
         "proxyMapTo": "https://echo.getpostman.com"
       }
     ]
+  },
+  "dependencies": {
+    "datepicker-for-ionic": "^1.1.7"
   }
 }

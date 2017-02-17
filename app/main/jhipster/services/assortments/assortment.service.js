@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('main')
-        .factory('Quotation', Quotation);
+        .factory('Assortment', Assortment);
 
-    Quotation.$inject = ['$resource', 'Config', 'DateUtils'];
+    Assortment.$inject = ['$resource', 'Config', 'DateUtils'];
 
-    function Quotation ($resource, Config, DateUtils) {
-        var resourceUrl =  Config.ENV.SERVER_URL + 'api/quotations';
+    function Assortment ($resource, Config, DateUtils) {
+        var resourceUrl =  Config.ENV.SERVER_URL + 'api/assortments';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},

@@ -57,5 +57,13 @@
             $state.go('indexpage');
         }
 
+        vm.editProject = editProject;
+
+        function editProject()
+        {
+        	$state.go("editproject", null, {reload: true});
+        }
+
+
 	}
 })();
