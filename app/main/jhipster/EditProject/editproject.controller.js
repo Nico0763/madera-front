@@ -9,7 +9,7 @@
 	 * Function who inject module for Angular
 	 * @type {Array}
 	 */
-	EditProjectController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope','ParseLinks','$ionicConfig', 'Quotation', '$ionicLoading'];
+	EditProjectController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope','ParseLinks','$ionicConfig', 'Quotation', '$ionicLoading','ionicDatePicker'];
 
 	/**
 	 * The index page controller 
@@ -27,7 +27,7 @@
 	 * @param {[type]} GetTours               GetTours service
 	 * @param {[type]} $ionicLoading          IonicLoading module
 	 */ 
-	function EditProjectController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope,  ParseLinks, $ionicConfig, Quotation, $ionicLoading)
+	function EditProjectController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope,  ParseLinks, $ionicConfig, Quotation, $ionicLoading,ionicDatePicker)
 	{
 		///////////////
 		// VARIABLES //
@@ -69,21 +69,62 @@
 		 * @type {Object}
 		 */
 		var vm = this; 
-        vm.quotation = $rootScope.quotation;
+
+		vm.datePickerOpenStatus = {};
+        vm.quotation = JSON.parse(JSON.stringify($rootScope.quotation));
         vm.saveQuotation = saveQuotation;
+        vm.goBack = goBack;
+
+        function goBack()
+        {
+        	$state.go("indexquotation");
+        }
 
         function saveQuotation()
         {
             $ionicLoading.show({
               template: 'Loading...'
             })
-
-            Quotation.update($rootScope.quotation,function (data)
+			console.debug(vm.quotation);
+            Quotation.update(vm.quotation,function (data)
             {
+            	console.debug(data);
+                $rootScope.quotation = data;
                 $ionicLoading.hide();
                 $state.go('indexquotation');
+            }, function(error)
+            {
+            	$ionicLoading.hide();
             });
         }
+
+     
+
+    $scope.openDatePicker = function(){
+
+    	 var ipObj1 = {
+      callback: function (val) {  //Mandatory
+      		var date = new Date(val);
+        	console.debug(vm.quotation);
+       	 	vm.quotation.date = date;//date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+	      	console.debug(vm.quotation);
+	      },
+	      from: new Date(2012, 1, 1), //Optional
+	      to: new Date(2020, 12, 31), //Optional
+	      inputDate: new Date(vm.quotation.date),      //Optional
+	      mondayFirst: true,          //Optional
+	      disableWeekdays: [0],       //Optional
+	      closeOnSelect: false,       //Optional
+	      templateType: 'popup'       //Optional
+	    };
+
+      ionicDatePicker.openDatePicker(ipObj1);
+    };
+
+
+    $rootScope.$on('chooseCustomer', function(event, customer) {vm.quotation.customer = customer; });
+
+    $rootScope.$on('chooseAssortment', function(event, assortment) {vm.quotation.assortment = assortment; });
 
 	}
 })();

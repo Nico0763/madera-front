@@ -40,41 +40,82 @@
                 }]
             }
 			})
+
 		 .state('choosecustomer', {
-            parent: 'app',
-            url: '/editproject/customer',
-            cache:false,
-				data:
-				{
-					authorities: ['ROLE_USER'],
-					pageTitle: 'global.menu.gmaptour'
-				},
-				 params: {
-	                page: {
-	                    value: '1',
-	                    squash: true
-	                },
-	                sort: {
-	                    value: 'id,asc',
-	                    squash: true
-	                },
-	                search: null
+                parent: 'editproject',
+                url: '/choosecustomer',
+                data: {
+                    authorities: ['ROLE_USER']
                 },
-				views:
-				{
-					'pageContent':
-					{
-						templateUrl: 'main/jhipster/EditProject/customer-dialog.html',
-						controller: 'CustomerDialogController',
-						controllerAs: 'vm'
-					}
-				},
-            	resolve: {
-                	translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('indexpage');
-                    return $translate.refresh();
+
+
+                params: {
+                page: {
+                    value: '1',
+                    squash: true
+                },
+                sort: {
+                    value: 'id,asc',
+                    squash: true
+                },
+                search: null
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'main/jhipster/EditProject/customer-dialog.html',
+                        controller: 'CustomerDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                                $translatePartialLoader.addPart('global');
+                                return $translate.refresh();
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('editproject');
+                    }, function() {
+                        $state.go('editproject');
+                    });
                 }]
-            }
-        });
+            })
+		 .state('chooseassortment', {
+                parent: 'editproject',
+                url: '/chooseassortment',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                params: {
+                page: {
+                    value: '1',
+                    squash: true
+                },
+                sort: {
+                    value: 'id,asc',
+                    squash: true
+                },
+                search: null
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'main/jhipster/AssortmentSelecter/assortmentselecter.html',
+                        controller: 'AssortmentSelecterController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                                $translatePartialLoader.addPart('global');
+                                return $translate.refresh();
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('editproject');
+                    }, function() {
+                        $state.go('editproject');
+                    });
+                }]
+            });
 	}
 })();

@@ -1,6 +1,7 @@
 'use strict';
 angular.module('main', [
         'ionic',
+        'ionic-datepicker',
         'ngCordova',
         'ui.router',
         'ui.bootstrap',

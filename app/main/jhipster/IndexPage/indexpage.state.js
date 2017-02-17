@@ -22,6 +22,7 @@
 		        "type": "flip",
 		        "direction": "up"
 		    },
+		    cache:false,
 			data:
 			{
 				authorities: ['ROLE_USER'],

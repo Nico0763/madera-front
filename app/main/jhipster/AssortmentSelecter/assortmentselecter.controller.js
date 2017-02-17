@@ -3,13 +3,13 @@
 	'use strict';
 	angular
 		.module('main')
-		.controller('IndexPageController', IndexPageController);
+		.controller('AssortmentSelecterController', AssortmentSelecterController);
 
 	/**
 	 * Function who inject module for Angular
 	 * @type {Array}
 	 */
-	IndexPageController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'GetQuotations','ParseLinks','$ionicConfig','searchQuotation'];
+	AssortmentSelecterController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope','ParseLinks','$ionicConfig', '$ionicLoading','GetAssortments', 'searchAssortment', '$uibModalInstance'];
 
 	/**
 	 * The index page controller 
@@ -27,56 +27,33 @@
 	 * @param {[type]} GetTours               GetTours service
 	 * @param {[type]} $ionicLoading          IonicLoading module
 	 */ 
-	function IndexPageController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, GetQuotations, ParseLinks, $ionicConfig, searchQuotation)
+	function AssortmentSelecterController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope,  ParseLinks, $ionicConfig, $ionicLoading, GetAssortments, searchAssortment, $uibModalInstance)
 	{
 		///////////////
 		// VARIABLES //
 		///////////////
 
+    var vm = this;
+    vm.predicate = 'id';
+    vm.reverse = 'asc';
+
+    vm.selectAssortment = selectAssortment;
+  	vm.search = search;
+    vm.resetpage = resetPage;
+    vm.searchBox = $state.params.search;
+    vm.stateSearch = $state.params.search;
+    vm.goBack = goBack;
 
 
-        //A appeler dans les autre state pour réactiver la transition
-        $ionicConfig.views.transition('none');
 
-		//////////////////////////
-		// Controller variables //
-		//////////////////////////
-
-		/**
-		 * The controller reference 
-		 * @type {Object}
-		 */
-		var vm = this; 
-		vm.loadPage = loadPage;
-        vm.predicate = 'id';
-        vm.reverse = 'asc';
-        vm.transition = transition;
-        vm.itemsPerPage = 3;
-        vm.search = search;
-        vm.resetpage = resetPage;
-        vm.nbPages = 1;
-
-        vm.searchBox = $state.params.search;
-        vm.stateSearch = $state.params.search;
-        vm.editQuotation = editQuotation;
-
-        if($state.params.search=="" || $state.params.search == null)
+    if($state.params.search=="" || $state.params.search == null)
             loadAll();
         else
             search();
 
-        $scope.getNumber = function(num) {
 
-            var numbers = [];
-            for(var i=1;i<=num;i++)
-                numbers.push(i);
-
-            return numbers;  
-        }
-        function loadAll () {
-           GetQuotations.query({
-                page: $state.params.page - 1,
-                size: vm.itemsPerPage,
+    function loadAll () {
+           GetAssortments.query({
                 sort: sort()
             }, onSuccess, onError);
             function sort() {
@@ -90,29 +67,11 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.quotations = data;
-                vm.page = $state.params.page;
-                vm.nbPages = Math.ceil(vm.queryCount/vm.itemsPerPage);
+                vm.assortments = data;
             }
             function onError(error) {
                 AlertService.error(error.data.message);
             }
-        }
-        
-        function loadPage (page) {
-            vm.page = page;
-            vm.transition();
-        }
-
-
-
-
-        function transition () {
-            $state.transitionTo($state.$current, {
-                page: vm.page,
-                sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
-                search: vm.currentSearch
-            });
         }
 
 
@@ -124,19 +83,14 @@
            var search = $state.params.search;
 
 
- 
+
          
            if(search!="" && search != null)
            {
 
-
-
-
-
-             searchQuotation.query({
-                critere: search,
-                page:  $state.params.page - 1,
-                size: vm.itemsPerPage,
+           	
+             searchAssortment.query({
+                critere: search,    
                 sort: sort()
             },onSuccess, onError);
 
@@ -162,10 +116,7 @@
                 vm.currentSearch = search;
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
-                vm.queryCount = vm.totalItems;
-                vm.quotations = data;
-                vm.page = $state.params.page;
-                vm.nbPages = Math.ceil(vm.queryCount/vm.itemsPerPage);
+                vm.assortments = data;
             }
             function onError(error) {
                console.log(error);
@@ -174,21 +125,20 @@
 
         function resetPage()
         {
-            $state.params.page=1;
             $state.params.search = null;
-            vm.page = 1;
         }
 
-        /*** Actions sur le devis ***/
-
-        function editQuotation(quot)
+    function selectAssortment(assortment)
         {
-             $rootScope.quotation =  quot;
-             $state.go('indexquotation', {reload:true});
+             $rootScope.$emit('chooseAssortment', assortment);
+            $uibModalInstance.close();
         }
 
+    
+    function goBack()
+        {
+             $uibModalInstance.close();
+        }
 
-		
-			
 	}
 })();
