@@ -47,8 +47,8 @@
                 data: {
                     authorities: ['ROLE_USER']
                 },
-
-
+               
+                cache:false,
                 params: {
                 page: {
                     value: '1',
@@ -74,9 +74,9 @@
                             }]
                         }
                     }).result.then(function() {
-                        $state.go('editproject');
+                      //  $state.go('editproject');
                     }, function() {
-                        $state.go('editproject');
+                      //  $state.go('editproject');
                     });
                 }]
             })
@@ -86,6 +86,7 @@
                 data: {
                     authorities: ['ROLE_USER']
                 },
+                cache:false,
                 params: {
                 page: {
                     value: '1',
@@ -111,9 +112,9 @@
                             }]
                         }
                     }).result.then(function() {
-                        $state.go('editproject');
+                        //$state.go('editproject');
                     }, function() {
-                        $state.go('editproject');
+                       // $state.go('editproject');
                     });
                 }]
             });

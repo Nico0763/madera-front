@@ -10,40 +10,59 @@
                 </div>-->
                 <jhi-alert-error></jhi-alert-error>
                 <div class="row">
-                        <div class="col col-80 col-offset-10">
-                            <input type="text" class="input--text input--search" ng-model="vm.searchBox" /><button class="btn btn--search" ui-sref="chooseassortment({search:vm.searchBox})">Search</button>
+                        <div class="col col-50 col-offset-50">
+                            <input type="text" class="input--text input--search" ng-model="vm.searchBox" /><button class="btn btn--search" ng-click="vm.goSearch()">Search</button>
                         </div>
                     </div>
                 <div class="row">
-                        <div class="col col-80 col-offset-10">
-
-                        <div class="table-responsive">
+                        <div class="col col-50">
+                            <div class="table-responsive">
+                                 <table class="index-table">
+                                    <thead>
+                                        <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                                            <th jh-sort-by="name"><span>Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="assortment in vm.assortments track by assortment.id">
+                                            <td ng-click="vm.currentAssortment = assortment" ng-class="{'assortment--crt': assortment == vm.currentAssortment}">{{assortment.name}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                    </div>
+                     <div class="col col-50">
+                            <div class="table-responsive">
                              <table class="index-table">
                                 <thead>
-                                    <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                                        <th jh-sort-by="name"><span>Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
-                                        <th><span>Prénom</span> <span class="glyphicon glyphicon-sort"></span></th>
-                                        <th><span>Adresse</span> <span class="glyphicon glyphicon-sort"></span></th>
-                                        <th></th>
-                                       
+                                    <tr>
+                                        <th><span ng-click="console.debug(vm.currentAssortment);">{{vm.currentAssortment.name}}</span> <span class="glyphicon glyphicon-sort"></span></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr ng-repeat="assortment in vm.assortments track by assortment.id">
-                                        <td>{{assortment.name}}</td>
-                                    </tr>
+                                 <tbody>
+                                <tr>
+                                <td>      
+                                    Finition extérieure : {{vm.currentAssortment.finition_ext.name}}<img class="assortment--img" ng-src="data:{{vm.currentAssortment.finition_ext.imageContentType}};base64,{{vm.currentAssortment.finition_ext.image}}" /><br/>
+                                    Type d'isolation : {{vm.currentAssortment.insulating_type.name}}<br/>
+                                    Type de couverture : {{vm.currentAssortment.cover_type.name}}<img class="assortment--img" ng-src="data:{{vm.currentAssortment.cover_type.imageContentType}};base64,{{vm.currentAssortment.cover_type.image}}" /><br/>
+                                    Huisserie : {{vm.currentAssortment.frame.name}}<br/>
+                                    <img class="assortment--img-frame" ng-src="data:{{vm.currentAssortment.frame.imageContentType}};base64,{{vm.currentAssortment.frame.image}}" />
+
+                                </td>
+                                </tr>
                                 </tbody>
-                            </table>
-                            </div>
-                             <div class="text-center row--pagination">
-
-                                <div class="page--nb" ng-repeat="number in getNumber(vm.nbPages)" ng-class="{'page--nb-current':number == vm.page }" nav-transition="none" ui-transition='none' ui-sref="choosecustomer({page:number,search:vm.stateSearch})" >
-                                    <span >{{number}}</span>
+                                </table>
                                 </div>
-
-                            </div>
-                    </div>
+                                
+                     </div>
                 </div>
+
+                <div class="row">
+                        <div class="col col-50 col-offset-50">
+                            <button class="btn btn--default" ng-click="vm.selectAssortment()">Valider</button>
+                        </div>
+                    </div>
 
 
     </ion-content>

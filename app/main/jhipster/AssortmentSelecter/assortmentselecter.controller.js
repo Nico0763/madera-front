@@ -43,8 +43,10 @@
     vm.searchBox = $state.params.search;
     vm.stateSearch = $state.params.search;
     vm.goBack = goBack;
+    vm.goSearch = goSearch;
+    vm.currentAssortment = null;
 
-
+    var modalInstance = $uibModalInstance;
 
     if($state.params.search=="" || $state.params.search == null)
             loadAll();
@@ -128,17 +130,30 @@
             $state.params.search = null;
         }
 
-    function selectAssortment(assortment)
+    function selectAssortment()
         {
-             $rootScope.$emit('chooseAssortment', assortment);
-            $uibModalInstance.close();
+            if(vm.currentAssortment!=null)
+            {
+             $rootScope.$emit('chooseAssortment', vm.currentAssortment);
+             $state.go('editproject');
+             modalInstance.close();
+         }
         }
 
     
     function goBack()
         {
-             $uibModalInstance.close();
+              $state.go('editproject');
+             modalInstance.close();
         }
+
+        function goSearch()
+        {
+           
+             $state.go("chooseassortment", {page:1,search:vm.searchBox});
+            modalInstance.close();
+        }
+
 
 	}
 })();

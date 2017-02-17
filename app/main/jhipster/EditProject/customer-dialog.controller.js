@@ -35,6 +35,8 @@
         vm.goBack = goBack;
         vm.goSearch = goSearch;
 
+        var modalInstance = $uibModalInstance;
+
 
         if($state.params.search=="" || $state.params.search == null)
             loadAll();
@@ -158,20 +160,22 @@
         {
             console.debug($scope.$parent);
              $rootScope.$emit('chooseCustomer', customer);
+            $state.go('editproject');
+           modalInstance.close({c:customer});
 
-            $uibModalInstance.close({c:customer});
         }
 
         function goBack()
         {
-             $uibModalInstance.close();
+             $state.go('editproject');
+             modalInstance.close();
         }
 
         function goSearch()
         {
-             
+           
              $state.go("choosecustomer", {page:1,search:vm.searchBox});
-             $uibModalInstance.close();
+            modalInstance.close();
         }
 
       
