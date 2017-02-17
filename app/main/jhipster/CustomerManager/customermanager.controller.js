@@ -90,7 +90,7 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.quotations = data;
+                vm.customers = data;
                 vm.page = $state.params.page;
                 vm.nbPages = Math.ceil(vm.queryCount/vm.itemsPerPage);
             }
@@ -157,7 +157,7 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.quotations = data;
+                vm.customers = data;
                 vm.page = $state.params.page;
                 vm.nbPages = Math.ceil(vm.queryCount/vm.itemsPerPage);
             }

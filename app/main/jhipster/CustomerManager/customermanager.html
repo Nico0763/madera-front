@@ -11,7 +11,7 @@
 
 					<div class="row">
 						<div class="col col-80 col-offset-10">
-							<input type="text" class="input--text input--search" ng-model="vm.searchBox" /><button class="btn btn--search" ui-sref="indexpage({page:1,search:vm.searchBox})">Search</button>
+							<input type="text" class="input--text input--search" ng-model="vm.searchBox" /><button class="btn btn--search" ui-sref="customermanager({page:1,search:vm.searchBox})">Search</button>
 						</div>
 					</div>
 				<div class="row">
@@ -57,7 +57,7 @@
 
 					        <div class="text-center row--pagination">
 
-								<div class="page--nb" ng-repeat="number in getNumber(vm.nbPages)" ng-class="{'page--nb-current':number == vm.page }" nav-transition="none" ui-transition='none' ui-sref="indexpage({page:number,search:vm.stateSearch})" >
+								<div class="page--nb" ng-repeat="number in getNumber(vm.nbPages)" ng-class="{'page--nb-current':number == vm.page }" nav-transition="none" ui-transition='none' ui-sref="customermanager({page:number,search:vm.stateSearch})" >
 									<span >{{number}}</span>
 								</div>
 
