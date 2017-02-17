@@ -18,7 +18,7 @@
 			{
 				parent: 'app',
 				url: '/customermanager',
-
+				cache: false,
 				data:
 				{
 					authorities: ['ROLE_USER'],
