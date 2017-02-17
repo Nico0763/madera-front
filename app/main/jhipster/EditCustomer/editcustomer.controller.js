@@ -9,7 +9,7 @@
 	 * Function who inject module for Angular
 	 * @type {Array}
 	 */
-	EditCustomerController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'Customer','ParseLinks','$ionicConfig'];
+	EditCustomerController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'Customer','ParseLinks','$ionicConfig', 'ionicLoading'];
 
 	/**
 	 * The index page controller
@@ -27,7 +27,7 @@
 	 * @param {[type]} GetTours               GetTours service
 	 * @param {[type]} $ionicLoading          IonicLoading module
 	 */
-	function EditCustomerController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, Customer, ParseLinks, $ionicConfig)
+	function EditCustomerController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, Customer, ParseLinks, $ionicConfig, $ionicLoading)
 	{
 		///////////////
 		// VARIABLES //
@@ -47,7 +47,6 @@
 		 * @type {Object}
 		 */
 		var vm = this;
-		vm.loadPage = loadPage;
         vm.customer = JSON.parse(JSON.stringify($rootScope.customer));
         vm.saveCustomer = saveCustomer;
         vm.goBack = goBack;
@@ -64,10 +63,8 @@
 						$ionicLoading.show({
 							template: 'Loading...'
 						})
-				console.debug(vm.customer);
 						Customer.update(vm.customer,function (data)
 						{
-							console.debug(data);
 								$rootScope.customer = data;
 								$ionicLoading.hide();
 								$state.go('customermanager');
