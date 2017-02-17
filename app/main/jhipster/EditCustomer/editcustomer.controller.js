@@ -9,7 +9,7 @@
 	 * Function who inject module for Angular
 	 * @type {Array}
 	 */
-	EditCustomerController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'Customer','ParseLinks','$ionicConfig', 'ionicLoading'];
+	EditCustomerController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'Customer','ParseLinks','$ionicConfig', '$ionicLoading'];
 
 	/**
 	 * The index page controller
