@@ -15,12 +15,41 @@
 					            <input type="text" class="form-control input--form" name="name" id="field_name"
 					                    ng-model="vm.customer.name"
 					                    ng-maxlength="50" />
-					            <div ng-show="editForm.name.$invalid">
-					                <p class="help-block"
-					                    ng-show="editForm.name.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="50">
-					                    This field cannot be longer than 50 characters.
-					                </p>
-					            </div>
+					    </div>
+				</div>
+
+				<div class="row">
+					    <label class="control-label label--form col col-25 col-offset-25" for="field_firstname">Prénom</label>
+					    <div class="col col-25">
+					            <input type="text" class="form-control input--form" name="firstname" id="field_firstname"
+					                    ng-model="vm.customer.firstname"
+					                    ng-maxlength="25" />
+					    </div>
+				</div>
+
+				<div class="row">
+					    <label class="control-label label--form col col-25 col-offset-25" for="field_address">Addresse</label>
+					    <div class="col col-25">
+					            <input type="text" class="form-control input--form" name="address" id="field_address"
+					                    ng-model="vm.customer.address"
+					                    ng-maxlength="50" />
+					    </div>
+				</div>
+
+				<div class="row">
+					    <label class="control-label label--form col col-25 col-offset-25" for="field_pc">Code Postal</label>
+					    <div class="col col-25">
+					            <input type="text" class="form-control input--form" name="pc" id="field_pc"
+					                    ng-model="vm.customer.pc"
+					                    ng-maxlength="5" />
+					    </div>
+				</div>
+
+				<div class="row">
+					    <label class="control-label label--form col col-25 col-offset-25" for="field_pc">Code Postal</label>
+					    <div class="col col-25">
+					            <input type="mail" class="form-control input--form" name="pc" id="field_pc"
+					                    ng-model="vm.customer.pc" />
 					    </div>
 				</div>
 
