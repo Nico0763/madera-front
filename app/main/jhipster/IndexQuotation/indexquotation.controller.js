@@ -51,17 +51,30 @@
         vm.quotation = $rootScope.quotation;
 
         vm.goBack = goBack;
+         vm.editProject = editProject;
+         vm.editProducts = editProducts;
+         vm.printProject = printProject;
 
         function goBack()
         {
             $state.go('indexpage');
         }
 
-        vm.editProject = editProject;
+       
 
         function editProject()
         {
         	$state.go("editproject", null, {reload: true});
+        }
+
+        function editProducts()
+        {
+        	$state.go("editproducts",null, {reload:true});
+        }
+
+        function printProject()
+        {
+        	$state.go("printproject",null, {reload:true});
         }
 
 

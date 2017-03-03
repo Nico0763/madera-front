@@ -134,7 +134,7 @@
             if(vm.currentAssortment!=null)
             {
                 $rootScope.quotation.assortment = vm.currentAssortment;
-                $state.go('editproject');
+                $state.go('add_choosepattern');
             }
         }
 

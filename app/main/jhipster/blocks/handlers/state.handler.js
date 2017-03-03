@@ -6,17 +6,17 @@
         .factory('stateHandler', stateHandler);
 
     stateHandler.$inject = ['$rootScope', '$state', '$sessionStorage', '$translate', 'JhiLanguageService', 'translationHandler', '$window',
-        'Auth', 'Principal', 'VERSION'];
+        'Auth', 'Principal', 'VERSION','Config'];
 
     function stateHandler($rootScope, $state, $sessionStorage, $translate, JhiLanguageService, translationHandler, $window,
-        Auth, Principal, VERSION) {
+        Auth, Principal, VERSION, Config) {
         return {
             initialize: initialize
         };
 
         function initialize() {
             $rootScope.VERSION = VERSION;
-
+            $rootScope.CLOUNDINARY_URL = Config.ENV.CLOUNDINARY_URL;
             var stateChangeStart = $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams, fromState) {
                 $rootScope.toState = toState;
                 $rootScope.toStateParams = toStateParams;

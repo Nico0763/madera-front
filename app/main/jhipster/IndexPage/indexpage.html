@@ -17,7 +17,7 @@
 						<div class="col col-80 col-offset-10">
 
 						<div class="table-responsive">
-							 <table class="index-table">
+							 <table class="madera--table index-table">
 					            <thead>
 					                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
 					                    <th jh-sort-by="reference"><span>Référence</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -39,13 +39,13 @@
 					                        <div class="btn-group flex-btn-group-container">
 					                            <button type="submit"
 					                            		ng-click="vm.editQuotation(quotation)"
-					                                    class="edit btn-edit">
+					                                    class="button icon-left ion-home btn btn--blue">
 					                                <span class="hidden-xs hidden-sm">Editer</span>
 					                            </button>
 					                            <button type="submit"
 					                                    ui-sref="madera-admin.composants-configuration.delete({id:composant.id})"
-					                                    class="delete btn-delete">
-					                                <span class="hidden-xs hidden-sm">-</span>
+					                                    class="btn btn--red">
+					                                <span class="hidden-xs hidden-sm">Supprimer</span>
 					                            </button>
 					                        </div>
 					                    </td>
@@ -83,6 +83,7 @@
 		  				</div>
 		  			</div>
 
+		  			
 
 
 	</ion-content>

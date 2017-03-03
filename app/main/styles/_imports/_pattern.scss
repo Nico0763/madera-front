@@ -1,0 +1,40 @@
+.box--pattern
+{
+	bot:20px;
+   border: 2px solid $color-blue-dark;
+   height:100%;
+
+   .box--pattern-title
+   {
+   	background-color:$color-blue-dark;
+   	text-align:center;
+   	color:white;
+   	height:75px;
+   	width:100%;
+   	font-size:25px;
+   	line-height:75px;
+   	font-weight:bold;
+   }
+
+   .box--pattern-img
+   {
+  	 padding:15px;
+  	 height: calc(100% - 75px);
+   		img
+   		{
+   			display:block;
+   			margin:auto;
+   			height:100%;
+   		}
+   }
+}
+
+.container--row
+{
+	height: calc(100% - 225px);
+}
+
+.container--100
+{
+	height: 100%;
+}

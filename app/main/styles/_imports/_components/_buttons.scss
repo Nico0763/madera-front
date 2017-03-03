@@ -10,6 +10,8 @@
     cursor:pointer;
     z-index:0;
     height:60px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .btn:before {
@@ -146,12 +148,14 @@
      color: #fff;
 }
 
-.btn--return
-{
-    float:left;
-    width:100px !important;
-    height:40px;
-}
+ .btn--return
+  {
+      width:20% !important;
+      height:75px;
+      font-weight:bold;
+      font-size:20px;
+  }
+
 
 /*** BTN RED ***/
 
@@ -182,7 +186,42 @@
       color: #fff;
 }
 
-.btn--red:active, .btn--connect:focus, {
+.btn--red:active, .btn--red:focus, {
     background: $color-red;
+     color: #fff;
+}
+
+
+/*** BTN BLUE ***/
+
+
+.btn--blue {
+    width:100%;
+}
+
+.btn--blue {
+   
+    background-color: $color-blue;
+    color: #fff;
+    -webkit-box-shadow: inset -1px -4px 0px -1px $color-blue-dark;
+    -moz-box-shadow: inset -1px -4px 0px -1px $color-blue-dark;
+    box-shadow: inset -1px -4px 0px -1px $color-blue-dark;
+}
+
+.btn--blue:before {
+  
+    background:  $color-blue-dark;
+  
+}
+
+
+
+.btn--blue:hover {
+    background: $color-blue;
+      color: #fff;
+}
+
+.btn--blue:active, .btn--blue:focus, {
+    background: $color-blue;
      color: #fff;
 }

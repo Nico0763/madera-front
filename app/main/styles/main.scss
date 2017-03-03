@@ -2,10 +2,14 @@
 @import "_imports/loginpage";
 @import "_imports/indexpage";
 @import "_imports/assortmentselecter";
+@import "_imports/pattern";
+@import "_imports/patterninformations";
+@import "_imports/configproduct";
 
 @import "_imports/_components/inputs";
 @import "_imports/_components/buttons";
 @import "_imports/_components/titles";
+@import "_imports/_components/table";
 
 /* start Password strength bar style */
 ul#strength {
@@ -38,3 +42,4 @@ ul#strength {
 .hidden{
     display: none;
 }
+

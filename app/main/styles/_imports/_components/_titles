@@ -1,16 +1,20 @@
+
 .main-title
 {
-	width:100%;
-	position:relative;
-	top:0px;
-	height:60px;
-	color:white;
-	background-color:$color-madera;
-	text-align:center;
-	font-size:20px;
-	line-height:60px;
-	border:solid 1px $color-madera-dark;
+  width:100%;
+  position:relative;
+  top:0px;
+  height:60px;
+  color:white;
+  background-color:$color-madera;
+  text-align:center;
+  font-size:20px;
+  line-height:60px;
+  border:solid 1px $color-madera-dark;
 }
+
+ 
+
 @media (min-width: 680px) {
   .modal {
     top: 0px !important;

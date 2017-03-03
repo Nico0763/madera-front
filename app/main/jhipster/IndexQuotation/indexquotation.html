@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
 	<ion-content>
 			<div class="main-title">{{vm.quotation.name}}</div>
-			<div class="return"><button ui-sref="indexpage" class="btn btn--red btn--return">Retour</div>
+			<button ui-sref="indexpage" class="btn btn--red btn--return">Retour</button>
 				<!--<div class="row text-center">
 					<div>
 						<h1>Choix du devis</h1>
@@ -12,8 +12,8 @@
 		  			<div class="row">
 		  				<div class="col col-80 col-offset-10">
 		  					<button ng-click="vm.editProject()" class="btn btn--default" style="margin-top: 10px;">Identifier le projet</button>
-		  					<button ng-click="" class="btn btn--default" style="margin-top: 10px;">Création des produits</button>
-		  					<button ng-click="" class="btn btn--default" style="margin-top: 10px;">Impression</button>
+		  					<button ng-click="vm.editProducts()" class="btn btn--default" style="margin-top: 10px;">Création des produits</button>
+		  					<button ng-click="vm.printProject()" class="btn btn--default" style="margin-top: 10px;">Impression</button>
 		  					<button ng-click="" class="btn btn--default" style="margin-top: 10px;">Modalités de paiement</button>
 		  				</div>
 		  			</div>

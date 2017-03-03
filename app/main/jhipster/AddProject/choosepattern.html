@@ -1,0 +1,56 @@
+<ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
+    <ion-content>
+            <div class="main-title">Choisissez maintenant votre modèle</div>
+            <div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+                <!--<div class="row text-center">
+                    <div>
+                        <h1>Choix du devis</h1>
+                        <h3>MADERA</h3>
+                    </div>
+                </div>-->
+                <jhi-alert-error></jhi-alert-error>
+
+                    <div class="row container--row">
+                        <div class="col-80 col-offset-10 container--100">
+                            <ion-slide-box class="container--100" on-slide-changed="vm.slideChanged(index)">
+
+                                <ion-slide class="container--100">
+                                    <div class="box box--pattern">
+                                          <div class="box--pattern-title">Pas de modèle - Fabrication sur mesure</div>
+                                          <div class="box--pattern-img">   
+                                            <img src="main/assets/images/aucun.png" />
+                                        </div>
+                                    </div>
+                                  </ion-slide>
+
+                                  <ion-slide ng-repeat="pattern in vm.patterns track by pattern.id" class="container--100">
+                                    <div class="box box--pattern">
+                                        <div class="box--pattern-title">{{pattern.name}}</div>
+                                        <div class="box--pattern-img">
+                                            <img src="{{CLOUNDINARY_URL}}{{pattern.url}}" />
+                                        </div>
+
+                                    </div>
+                                     <!--<img style="width:100%" ng-src="data:{{pattern.imageContentType}};base64,{{pattern.image}}" />-->
+                                  </ion-slide>
+
+                              
+                            </ion-slide-box>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div ng-hide="vm.crtPattern == null" class="col-25 col-offset-25">
+                             <button  class="btn btn--blue" ng-click="vm.patternInformations()">Plus d'infos</button>
+                        </div>
+                        <div ng-class="{'col-50 col-offset-25':vm.crtPattern == null, 'col-25':vm.crtPattern != null}" class="col-25">
+                             <button class="btn btn--default" ng-click="vm.save()">Valider</button>
+                        </div>
+                    </div>
+
+               
+                
+
+
+    </ion-content>
+</ion-view>
+

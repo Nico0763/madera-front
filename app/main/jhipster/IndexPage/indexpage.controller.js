@@ -61,6 +61,9 @@
         vm.editQuotation = editQuotation;
         vm.addProject = addProject;
 
+ 
+
+
         if($state.params.search=="" || $state.params.search == null)
             loadAll();
         else

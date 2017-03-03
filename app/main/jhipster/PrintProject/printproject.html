@@ -1,0 +1,14 @@
+<ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
+	<ion-content>
+			<div class="main-title">#{{vm.quotation.reference}} - Impression</div>
+			<div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+		  			<div class="row">
+		  				<div class="col col-80 col-offset-10">
+		  					<button ng-click="vm.printTechnical()" class="btn btn--default" style="margin-top: 10px;">Imprimer le dossier technique</button>
+		  					<button ng-click="vm.printQuotation()" class="btn btn--default" style="margin-top: 10px;">Imprimer le devis</button>
+		  					
+		  				</div>
+		  			</div>
+	</ion-content>
+</ion-view>
+

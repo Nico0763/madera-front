@@ -77,7 +77,7 @@
 
         function goBack()
         {
-        	$state.go("indexquotation");
+        	$state.go("indexpage");
         }
 
         function next()

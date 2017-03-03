@@ -1,0 +1,106 @@
+<ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
+    <ion-content>
+        <div class="main-title">Configuration du produit</div>
+        <div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+
+        <div class="row">
+            <div class="col col-80 col-offset-10">
+             <div class="table-responsive">
+                   <table class="index-table">
+                       <thead>
+                                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                                     <th jh-sort-by="image"><span>Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="name"><span>Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="module"><span>Angle</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                      <th jh-sort-by="module"><span>Unité d'usage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="module"><span>Longueur</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                  
+                                    <th></th>
+                                   
+                                </tr>
+                        </thead>
+                        <tbody>
+
+                <tr ng-repeat="cp in vm.components track by cp.id" ng-form="formComponent">
+                        <td><img ng-show="cp.component.url" class="configproduct--img" src="{{CLOUNDINARY_URL}}{{cp.component.url}}" /></td>
+                        <td>{{cp.component.reference}}</td>
+
+
+                        <td ng-if="cp != vm.select">{{angles[cp.angle].label}}</td>
+                        <td ng-if="cp == vm.select">
+                            <select 
+                                class="form-control input--form"
+                                ng-model="vm.editData.angle" name="angle"
+                                    ng-options="angle.value as angle.label for angle in angles">
+                                </select>
+                        </td>
+                        <td>{{cp.component.component_nature.unit_used.name}}</td>
+                        
+
+                        <td ng-if="cp != vm.select">{{cp.length}}</td>
+                        <td ng-if="cp == vm.select">
+                              <input type="text" class="form-control" name="length" id="field_length"  value="{{cp.length}}" 
+                                    ng-model="vm.editData.length"
+                                    ng-pattern="{{cp.component.component_nature.unit_used.regular_expression}}" />
+                                    <div ng-show="formComponent.length.$invalid">
+                                        <p class="help-block"
+                                            ng-show="formComponent.length.$error.pattern">
+                                            Ce champs doit suivre le pattern {{cp.component.component_nature.unit_used.regular_expression}}
+                                        </p>
+                                    </div>
+                        </td>
+                    
+
+                      
+                        
+                       
+                        
+
+                       
+
+
+                    
+                    <td class="text-right">
+                        <div ng-if="cp != vm.select" class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ng-click="vm.selectElement(cp, vm.editData)"
+                                    class="edit btn-edit">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                        </div>
+
+                         <div ng-if="cp == vm.select" class="btn-group flex-btn-group-container">
+                             <button type="submit"
+                                   ng-click="vm.select=-1"
+                                    class="btn btn-danger btn-sm" style="min-width:90px">
+                                <span class="hidden-xs hidden-sm">Annuler</span>
+                            </button>
+                             <button type="submit"
+                              ng-show="formComponent.$valid"
+                                    ng-click="vm.save(vm.editData)"
+                                    class="btn btn-success btn-sm" style="min-width:90px">
+                                <span class="hidden-xs hidden-sm">Valider</span>
+                            </button>
+                        </div>
+
+                    </td>
+
+
+
+                </tr>
+
+               
+
+
+
+            </tbody>
+        </table>
+        </div>
+        </div>
+    </div>
+
+
+    </ion-content>
+</ion-view>
+
