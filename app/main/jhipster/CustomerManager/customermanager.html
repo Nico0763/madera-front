@@ -36,13 +36,13 @@
 
 					                    <td class="text-right">
 					                        <div class="btn-group flex-btn-group-container">
-					                            <button type="submit"
-					                            		ng-click="vm.editCustomer(customer)"
+					                            <button
+					                            		ui-sref="editcustomer({id:customer.id})"
 					                                    class="edit btn-edit">
 					                                <span class="hidden-xs hidden-sm">Editer</span>
 					                            </button>
-					                            <button type="submit"
-					                                    ui-sref="madera-admin.composants-configuration.delete({id:composant.id})"
+					                            <button
+					                                    ng-click="vm.removeCustomer(customer)"
 					                                    class="delete btn-delete">
 					                                <span class="hidden-xs hidden-sm">-</span>
 					                            </button>
@@ -70,7 +70,7 @@
 
 		  			<div class="row">
 		  				<div class="col col-50 col-offset-25">
-		  					<button ng-click="vm.connect()" class="btn btn--default" style="margin-top: 10px;">Ajouter un client</button>
+		  					<button ng-click="vm.addCustomer()" class="btn btn--default" style="margin-top: 10px;">Ajouter un client</button>
 		  				</div>
 		  			</div>
 

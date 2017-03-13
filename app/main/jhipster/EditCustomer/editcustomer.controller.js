@@ -9,7 +9,7 @@
 	 * Function who inject module for Angular
 	 * @type {Array}
 	 */
-	EditCustomerController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'Customer','ParseLinks','$ionicConfig', '$ionicLoading'];
+	EditCustomerController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'Customer','ParseLinks','$ionicConfig', '$ionicLoading', 'entity'];
 
 	/**
 	 * The index page controller
@@ -27,7 +27,7 @@
 	 * @param {[type]} GetTours               GetTours service
 	 * @param {[type]} $ionicLoading          IonicLoading module
 	 */
-	function EditCustomerController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, Customer, ParseLinks, $ionicConfig, $ionicLoading)
+	function EditCustomerController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, Customer, ParseLinks, $ionicConfig, $ionicLoading, entity)
 	{
 		///////////////
 		// VARIABLES //
@@ -47,32 +47,48 @@
 		 * @type {Object}
 		 */
 		var vm = this;
-        vm.customer = JSON.parse(JSON.stringify($rootScope.customer));
-        vm.saveCustomer = saveCustomer;
-        vm.goBack = goBack;
+		console.debug(entity);
+        vm.customer = entity;
+        vm.clear = clear;
+        vm.save = save;
+
+                vm.goBack = goBack;
 
 
 				function goBack()
 				{
 					$state.go("customermanager");
 				}
+    
 
+        function clear () {
+            $uibModalInstance.dismiss('cancel');
+        }
 
-				function saveCustomer()
-				{
-						$ionicLoading.show({
+        function save () {
+            vm.isSaving = true;
+            $ionicLoading.show({
 							template: 'Loading...'
 						})
-						Customer.update(vm.customer,function (data)
-						{
-								$rootScope.customer = data;
-								$ionicLoading.hide();
-								$state.go('customermanager');
-						}, function(error)
-						{
-							$ionicLoading.hide();
-						});
-				}
+            if (vm.customer.id !== null) {
+                Customer.update(vm.customer, onSaveSuccess, onSaveError);
+            } else {
+                Customer.save(vm.customer, onSaveSuccess, onSaveError);
+            }
+        }
+
+        function onSaveSuccess (result) {
+             $ionicLoading.hide();
+			$state.go('customermanager');
+            vm.isSaving = false;
+
+        }
+
+        function onSaveError () {
+            vm.isSaving = false;
+            $ionicLoading.hide();
+        }
+
 
 
 	}

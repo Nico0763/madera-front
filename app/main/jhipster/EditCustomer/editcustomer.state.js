@@ -17,7 +17,7 @@
 		$stateProvider.state('editcustomer',
 			{
 				parent: 'app',
-				url: '/editcustomer',
+				url: '/{id}/editcustomer',
 				cache: false,
 				data:
 				{
@@ -34,11 +34,45 @@
 					}
 				},
             	resolve: {
-                	translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('indexpage');
-                    return $translate.refresh();
-                }]
-            }
-			});
+		                entity: ['Customer','$stateParams', function(Customer, $stateParams) {
+		                            var cust = Customer.get({id : $stateParams.id}).$promise;
+		                            console.debug(cust);
+		                            return cust;
+		                        }]
+            	}
+			})
+		.state('addcustomer', {
+            parent: 'app',
+            url: '/addcustomer',
+            cache: false,
+				data:
+				{
+					authorities: ['ROLE_USER'],
+					pageTitle: 'global.menu.gmaptour'
+				},
+				views:
+				{
+					'pageContent':
+					{
+						templateUrl: 'main/jhipster/EditCustomer/editcustomer.html',
+						controller: 'EditCustomerController',
+						controllerAs: 'vm'
+					}
+				},
+            	resolve: {
+		               entity: function () {
+		                            return {
+		                                name: null,
+		                                firstname: null,
+		                                address: null,
+		                                pc: null,
+		                                city: null,
+		                                phone_number: null,
+		                                mail: null,
+		                                id: null
+		                            };
+		                        }
+		         }
+	})
 	}
 })();
