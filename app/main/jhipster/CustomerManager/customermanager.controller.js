@@ -9,7 +9,7 @@
 	 * Function who inject module for Angular
 	 * @type {Array}
 	 */
-	CustomerManagerController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'GetCustomers','ParseLinks','$ionicConfig','searchCustomer'];
+	CustomerManagerController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope', 'GetCustomers','ParseLinks','$ionicConfig','searchCustomer', '$ionicLoading', 'Customer', '$ionicPopup'];
 
 	/**
 	 * The index page controller
@@ -27,7 +27,7 @@
 	 * @param {[type]} GetTours               GetTours service
 	 * @param {[type]} $ionicLoading          IonicLoading module
 	 */
-	function CustomerManagerController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, GetCustomers, ParseLinks, $ionicConfig, searchCustomer)
+	function CustomerManagerController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope, GetCustomers, ParseLinks, $ionicConfig, searchCustomer, $ionicLoading, Customer, $ionicPopup)
 	{
 		///////////////
 		// VARIABLES //
@@ -59,6 +59,8 @@
         vm.searchBox = $state.params.search;
         vm.stateSearch = $state.params.search;
         vm.editCustomer = editCustomer;
+        vm.addCustomer = addCustomer;
+        vm.removeCustomer = removeCustomer;
 
         if($state.params.search=="" || $state.params.search == null)
             loadAll();
@@ -183,11 +185,39 @@
 
         function editCustomer(customer)
         {
+            console.debug(customer);
              $rootScope.customer =  customer;
-             $state.go('editcustomer', {reload:true});
+             $state.go('editcustomer', {id:customer.id}, {reload:true});
         }
 
 
+        function addCustomer()
+        {
+             $state.go('addcustomer', {reload:true});
+        }
+
+        function removeCustomer(c)
+        {   
+            $ionicLoading.show({
+              template: 'Loading...'
+            });
+           Customer.delete({id:c.id},successRemove, errorRemove);
+        }
+
+        function successRemove(data)
+        {
+            $ionicLoading.hide()
+            search();
+        }
+
+        function errorRemove()
+        {
+            $ionicLoading.hide()
+            $ionicPopup.alert({
+             title: 'Erreur de suppression',
+             template: 'Le client possède des devis'
+           });
+        }
 
 
 	}

@@ -7,7 +7,7 @@
     Customer.$inject = ['$resource', 'Config'];
 
     function Customer ($resource, Config) {
-        var resourceUrl =  Config.ENV.SERVER_URL + 'api/customers';
+        var resourceUrl =  Config.ENV.SERVER_URL + 'api/customers/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
@@ -18,8 +18,7 @@
                         data = angular.fromJson(data);
                     }
                     return data;
-                },
-                isArray:true
+                }
             },
             'update': { method:'PUT' }
         });

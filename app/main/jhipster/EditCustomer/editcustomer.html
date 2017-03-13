@@ -1,6 +1,7 @@
 <ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
 	<ion-content>
-			<div class="main-title">{{vm.customer.name}} {{vm.customer.firstname}} - Éditer le client</div>
+			<div ng-show="vm.customer.id !== null" class="main-title">{{vm.customer.name}} {{vm.customer.firstname}} - Éditer le client</div>
+			<div ng-show="vm.customer.id == null" class="main-title">Ajouter un client</div>
 			<div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
 				<!--<div class="row text-center">
 					<div>
@@ -9,56 +10,122 @@
 					</div>
 				</div>-->
 
-				<div class="row">
-					    <label class="control-label label--form col col-25 col-offset-25" for="field_name">Nom</label>
-					    <div class="col col-25">
-					            <input type="text" class="form-control input--form" name="name" id="field_name"
-					                    ng-model="vm.customer.name"
-					                    ng-maxlength="50" />
-					    </div>
-				</div>
+				<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
-				<div class="row">
-					    <label class="control-label label--form col col-25 col-offset-25" for="field_firstname">Prénom</label>
-					    <div class="col col-25">
-					            <input type="text" class="form-control input--form" name="firstname" id="field_firstname"
-					                    ng-model="vm.customer.firstname"
-					                    ng-maxlength="25" />
-					    </div>
-				</div>
-
-				<div class="row">
-					    <label class="control-label label--form col col-25 col-offset-25" for="field_address">Addresse</label>
-					    <div class="col col-25">
-					            <input type="text" class="form-control input--form" name="address" id="field_address"
-					                    ng-model="vm.customer.address"
-					                    ng-maxlength="50" />
-					    </div>
-				</div>
-
-				<div class="row">
-					    <label class="control-label label--form col col-25 col-offset-25" for="field_pc">Code Postal</label>
-					    <div class="col col-25">
-					            <input type="text" class="form-control input--form" name="pc" id="field_pc"
-					                    ng-model="vm.customer.pc"
-					                    ng-maxlength="5" />
-					    </div>
-				</div>
-
-				<div class="row">
-					    <label class="control-label label--form col col-25 col-offset-25" for="field_pc">Code Postal</label>
-					    <div class="col col-25">
-					            <input type="mail" class="form-control input--form" name="pc" id="field_pc"
-					                    ng-model="vm.customer.pc" />
-					    </div>
-				</div>
+					<jhi-alert-error></jhi-alert-error>
+			        <div class="row form-group">
+			            <label class="control-label label--form col col-25 col-offset-25" for="field_name">Nom</label>
+			            <input type="text" class="form-control col col-25" name="name" id="field_name"
+			                    ng-model="vm.customer.name"
+			                    ng-maxlength="50" />
+			        </div>
+			        <span class="row" ng-show="editForm.name.$invalid">
+				          <p class="col-25 col-offset-50 help-block"
+				                   ng-show="editForm.name.$error.maxlength">
+				                    Le champ ne doit pas dépasser 50 caractères
+				          </p>
+				    </span>
 
 
-				<div class="row">
 
-					    <div class="col col-25 col-offset-50">
-								<button ng-click="vm.saveCustomer()" class="btn btn--default" >Sauvegarder</button>
-					    </div>
-				</div>
+			        <div class="row form-group">
+			            <label class="control-label label--form col col-25 col-offset-25" for="field_firstname">Prénom</label>
+			            <input type="text" class="form-control col col-25" name="firstname" id="field_firstname"
+			                    ng-model="vm.customer.firstname"
+			                    ng-maxlength="25" />
+			        </div>
+			        <span class="row" ng-show="editForm.firstname.$invalid">
+				          <p class="col-25 col-offset-50 help-block"
+				                   ng-show="editForm.firstname.$error.maxlength">
+				                    Le champ ne doit pas dépasser 25 caractères
+				          </p>
+				    </span>
+
+
+
+
+			        <div class="row form-group">
+			            <label class="control-label label--form col col-25 col-offset-25" for="field_address">Adresse</label>
+			            <input type="text" class="form-control col col-25" name="address" id="field_address"
+			                    ng-model="vm.customer.address"
+			                    ng-maxlength="50" />
+			        </div>
+			        <span class="row" ng-show="editForm.address.$invalid">
+				          <p class="col-25 col-offset-50 help-block"
+				                   ng-show="editForm.address.$error.maxlength">
+				                    Le champ ne doit pas dépasser 50 caractères
+				          </p>
+				    </span>
+
+
+
+
+			        <div class="row form-group">
+			            <label class="control-label label--form col col-25 col-offset-25" for="field_pc">Code postal</label>
+			            <input type="text" class="form-control col col-25" name="pc" id="field_pc"
+			                    ng-model="vm.customer.pc"
+			                    ng-maxlength="5" />
+			        </div>
+			        <span class="row" ng-show="editForm.pc.$invalid">
+				          <p class="col-25 col-offset-50 help-block"
+				                   ng-show="editForm.pc.$error.maxlength">
+				                    Le champ ne doit pas dépasser 5 caractères
+				          </p>
+				    </span>
+
+
+			        <div class="row form-group">
+			            <label class="control-label label--form col col-25 col-offset-25" for="field_city">Ville</label>
+			            <input type="text" class="form-control col col-25" name="city" id="field_city"
+			                    ng-model="vm.customer.city"
+			                    ng-maxlength="50" />
+			        </div>
+			        <span class="row" ng-show="editForm.city.$invalid">
+				          <p class="col-25 col-offset-50 help-block"
+				                   ng-show="editForm.city.$error.maxlength">
+				                    Le champ ne doit pas dépasser 50 caractères
+				          </p>
+				    </span>
+
+
+
+
+			        <div class="row form-group">
+			            <label class="control-label label--form col col-25 col-offset-25" for="field_phone_number">Numéro de téléphone</label>
+			            <input type="text" class="form-control col col-25" name="phone_number" id="field_phone_number"
+			                    ng-model="vm.customer.phone_number"
+			                    ng-pattern="/^[0-9]{10}$/" />
+			        </div>
+			        <span class="row" ng-show="editForm.phone_number.$invalid">
+				          <p class="col-25 col-offset-50 help-block"
+				                   ng-show="editForm.phone_number.$error.pattern">
+				                    Il ne s'agit pas d'un numéro de téléphone
+				          </p>
+				    </span>
+
+
+
+			        <div class="row form-group">
+			            <label class="control-label label--form col col-25 col-offset-25" for="field_mail">Adresse Mail</label>
+			            <input type="text" class="form-control col col-25" name="mail" id="field_mail"
+			                    ng-model="vm.customer.mail"
+			                    ng-pattern="/^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$/" />
+			        </div>
+
+			        <span class="row" ng-show="editForm.mail.$invalid">
+				          <p class="col-25 col-offset-50 help-block"
+				                    ng-show="editForm.mail.$error.pattern">
+				                    Il ne s'agit pas d'une adresse mail
+				          </p>
+				    </span>
+
+
+					<div class="row">
+
+						    <div class="col col-25 col-offset-50">
+									<button ng-hide="editForm.$invalid || vm.isSaving" type="submit" class="btn btn--default" >Sauvegarder</button>
+						    </div>
+					</div>
+				</form>
 	</ion-content>
 </ion-view>
