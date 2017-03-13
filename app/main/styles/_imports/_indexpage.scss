@@ -6,10 +6,9 @@ width:100%;
 		color:white;
 		font-weight:bold;
 		font-size:15px;
-		min-width:100px;
 		height:50px;
-		background-color:$background-color-header-table;
-		
+		border-color:$color-madera;
+
 		line-height:50px;
 
 
@@ -17,14 +16,23 @@ width:100%;
    		border-width: 1px;
 	}
 	td{
-		color:$background-color-header-table;
-		border-color:$background-color-header-table;
+		color:$color-madera;
+		border-color:$color-madera;
 		height:40px;
 		border-style: solid;
    		border-width: 1px;
    		line-height:40px;
    		text-align:center;
    		font-size:13px;
+	}
+	#th-date {
+		width: 75px !important;
+	}
+	#th-ref {
+		width: 100px !important;
+	}
+	#th-tools {
+		width: 195px !important;
 	}
 	.edit
 	{
@@ -38,27 +46,9 @@ width:100%;
 	}
 }
 
-
-.btn-edit
-{
-	/*line-height:100%;*/
-	font-weight:bold;
-	background-color:$background-color-header-table;
-	color:white;
-	border:none;
-}
-.btn-delete
-{
-	/*line-height:100%:*/
-	font-weight:bold;
-	background-color:red;
-	color:white;
-	border:none;
-}
-
 .page--nb
 {
-	background-color:$color-madera; 
+	background-color:$color-madera;
 	color:white;
 	width:40px;
 	height:40px;

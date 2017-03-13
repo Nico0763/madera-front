@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
 	<ion-content>
 			<div class="main-title">#{{vm.quotation.name}} - Création des produits</div>
-			<div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+			<div class="return"><button ng-click="vm.goBack()" class="btn btn--return">Retour</div>
 				<!--<div class="row text-center">
 					<div>
 						<h1>Choix du devis</h1>
@@ -12,7 +12,7 @@
 				<div class="row">
 					    <div class="col col-80 col-offset-10">
 					         <div class="table-responsive">
-								 <table class="index-table">
+								 <table class="madera--table index-table">
 						            <thead>
 						                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
 						                    <th jh-sort-by="module"><span>Module</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -31,14 +31,14 @@
 
 						                    <td ng-if="product != vm.select">{{product.name}}</td>
 						                    <td ng-if="product == vm.select">
-						                        <input type="text" class="form-control" name="name" id="field_name"  value="{{product.name}}" 
+						                        <input type="text" class="form-control" name="name" id="field_name"  value="{{product.name}}"
 			                                    ng-model="vm.editData.name" />
 						                    </td>
 
 
 
 						                    <td>
-						                    	<button class="edit btn-edit" ui-sref="configproduct({id_product:product.id})">
+						                    	<button class="btn btn-edit" ui-sref="configproduct({id_product:product.id})">
 						                    		Sélectionner
 						                    	</button>
 						                    </td>
@@ -79,12 +79,12 @@
 
 						                <tr>
 						                    <td>
-						                    	<button class="edit btn-edit" ui-sref="choosemodule">
+						                    	<button class="btn btn-edit" ui-sref="choosemodule">
 						                    		<span ng-show="vm.newProduct.module == null">Sélectionner</span>
 						                    		<span ng-show="vm.newProduct.module != null">{{vm.newProduct.module.name}}</span>
 						                    	</button>
 						                    </td>
-						                    
+
 
 
 
@@ -95,9 +95,9 @@
 						                        <div class="btn-group flex-btn-group-container">
 						                            <button
 						                            		ng-click="vm.addProduct()"
-						                                    class="btn btn--default">
+						                                    class="btn btn-edit">
 						                                <span class="hidden-xs hidden-sm">Ajouter</span>
-						                            </button>   
+						                            </button>
 						                        </div>
 						                    </td>
 						                </tr>
@@ -112,10 +112,9 @@
 
 
 
-					  
 
-						    
+
+
 
 	</ion-content>
 </ion-view>
-

@@ -3,7 +3,6 @@
      font-family: 'Museo Sans', sans-serif;
     font-size: 15px;
     font-weight: normal;
-    border-radius: 3px;
     border: none;
     display:inline-block;
     position:relative;
@@ -47,7 +46,7 @@
 }
 
 .btn--default {
-   
+
     background-color: $color-madera;
     color: #fff;
     -webkit-box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
@@ -56,9 +55,9 @@
 }
 
 .btn--default:before {
-  
+
     background:  $color-madera-dark;
-  
+
 }
 
 
@@ -84,7 +83,7 @@
 }
 
 .btn--search {
-   
+
     background-color: $color-madera;
     color: #fff;
     -webkit-box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
@@ -94,9 +93,9 @@
 }
 
 .btn--search:before {
-  
+
     background:  $color-madera-dark;
-  
+
 }
 
 
@@ -122,7 +121,7 @@
 }
 
 .btn--connect {
-   
+
     background-color: $color-madera;
     color: #fff;
     -webkit-box-shadow: inset -1px -4px 0px -1px $color-madera-dark;
@@ -131,9 +130,9 @@
 }
 
 .btn--connect:before {
-  
+
     background:  $color-madera-dark;
-  
+
 }
 
 
@@ -150,10 +149,12 @@
 
  .btn--return
   {
-      width:20% !important;
-      height:75px;
+      width:100px !important;
+      height:50px;
       font-weight:bold;
-      font-size:20px;
+      font-size:15px;
+      background-color: $background-color-button;
+      color: white;
   }
 
 
@@ -165,7 +166,7 @@
 }
 
 .btn--red {
-   
+
     background-color: $color-red;
     color: #fff;
     -webkit-box-shadow: inset -1px -4px 0px -1px $color-red-dark;
@@ -174,9 +175,9 @@
 }
 
 .btn--red:before {
-  
+
     background:  $color-red-dark;
-  
+
 }
 
 
@@ -200,7 +201,7 @@
 }
 
 .btn--blue {
-   
+
     background-color: $color-blue;
     color: #fff;
     -webkit-box-shadow: inset -1px -4px 0px -1px $color-blue-dark;
@@ -209,9 +210,9 @@
 }
 
 .btn--blue:before {
-  
+
     background:  $color-blue-dark;
-  
+
 }
 
 
@@ -224,4 +225,29 @@
 .btn--blue:active, .btn--blue:focus, {
     background: $color-blue;
      color: #fff;
+}
+
+
+
+.btn-edit
+{
+	/*line-height:100%;*/
+	font-weight:bold;
+	background-color:$background-color-header-table;
+	color:white;
+	border:none;
+  width: 85px;
+  height: 50px;
+  margin: 5px;
+}
+.btn-delete
+{
+	/*line-height:100%:*/
+	font-weight:bold;
+	background-color:red;
+	color:white;
+	border:none;
+  width: 85px;
+  height: 50px;
+  margin: 5px;
 }

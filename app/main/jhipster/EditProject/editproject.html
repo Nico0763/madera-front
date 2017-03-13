@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
 	<ion-content>
 			<div class="main-title">#{{vm.quotation.name}} - Identifier le projet</div>
-			<div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+			<div class="return"><button ng-click="vm.goBack()" class="btn btn--return">Retour</div>
 				<!--<div class="row text-center">
 					<div>
 						<h1>Choix du devis</h1>
@@ -32,7 +32,7 @@
 					            </div>
 					    </div>
 				</div>
-				
+
 				<div class="row">
 					    <label class="control-label label--form col col-25 col-offset-25" for="field_date">Date</label>
 					    <div class="col col-25">
@@ -47,7 +47,7 @@
 				<div class="row">
 					    <label class="control-label label--form col col-25 col-offset-25" for="field_date">État</label>
 					    <div class="col col-25">
-								<select 
+								<select
 								class="form-control input--form"
 								ng-model="vm.quotation.state"
 								    ng-options="state.value as state.label for state in states">
@@ -63,7 +63,7 @@
 				</div>
 
 				<div class="row">
-					    
+
 					    <div class="col col-25 col-offset-50">
 								<button ng-click="vm.saveQuotation()" class="btn btn--default" >Sauvegarder</button>
 					    </div>
@@ -74,10 +74,9 @@
 
 
 
-					  
 
-						    
+
+
 
 	</ion-content>
 </ion-view>
-
