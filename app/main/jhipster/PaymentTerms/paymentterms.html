@@ -1,13 +1,178 @@
 <ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
 	<ion-content>
 			<div class="main-title">#{{vm.quotation.reference}} - Modalités de paiement</div>
-			<div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+			<div class="return"><button ng-click="vm.goBack()" class="btn btn--return">Retour</div>
 		  			<div class="row">
 					    <label class="control-label label--form col col-40 col-offset-10" for="field_date">État</label>
 					    <div class="col col-40">
 								<button ng-click="vm.chooseState()" class="btn btn--default" style="margin-top: 10px;">Changer l'état</button>
 					    </div>
+					</div>
+					<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+						<div class="row form-group">
+			            	<label class="control-label label--form col col-25 col-offset-25" for="field_commercial_percentage">Pourcentage commercial</label>
+			            	<input type="text" class="form-control col col-25" name="commercial_percentage" id="field_commercial_percentage"
+			                    ng-model="vm.quotation.commercial_percentage"
+			                    ng-pattern="/^([0-9]|[1-9][0-9]|100)$/" />
+					        </div>
+					        <span class="row" ng-show="editForm.commercial_percentage.$invalid">
+						          <p class="col-25 col-offset-50 help-block"
+						                   ng-show="editForm.commercial_percentage.$error.pattern">
+						                    Il doit s'agir d'un entier entre 0 et 100
+						          </p>
+						    </span>
+
+
+						    <div class="row">
+
+							    <div class="col col-25 col-offset-50">
+										<button ng-hide="editForm.$invalid || vm.isSaving" type="submit" class="btn btn--default" >Sauvegarder</button>
+							    </div>
+						</div>
+					</form>
+
+
+					<div class="row">
+					    <label class="control-label label--form col col-40 col-offset-10">Montant total</label>
+
+					    <label class="control-label label--form col col-40">{{vm.total}} €</label>
+					</div>
+
+					<div class="row">
+						    <label class="control-label label--form col col-40 col-offset-10">Montant réduit</label>
+
+						    <label class="control-label label--form col col-40">{{vm.total - vm.quotation.commercial_percentage/100 * vm.total}} €</label>
+						    
+						</div>
+
+
+
+
+						
+					<!-- Lots de paiement -->
+					<div class="row">
+					    <div class="col col-80 col-offset-10">
+					         <div class="table-responsive">
+								 <table class="madera--table index-table">
+						            <thead>
+						                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+						                    <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+						                    <th><span>Lot</span> <span class="glyphicon glyphicon-sort"></span></th>
+						                    <th><span>Pourcentage</span> <span class="glyphicon glyphicon-sort"></span></th>
+						                    
+						                    <th><span>Somme</span> <span class="glyphicon glyphicon-sort"></span></th>
+						                    <th></th>
+
+						                </tr>
+						            </thead>
+						            <tbody>
+
+
+
+
+						            <!-- Liste des lots de paiement -->
+
+						                <tr ng-repeat="deadline in vm.deadlines track by deadline.id">
+						                   <td ng-if="deadline != vm.select">{{deadline.date}}</td>
+						                    <td ng-if="deadline == vm.select">
+						                        <div class="input-group">
+										    		{{vm.editData.date | date: 'yyyy-MM-dd'}}
+										    		<button ng-click="openDatePicker(vm.editData)">Choisir une date</button>
+								                </div>
+						                    </td>
+
+						                    <td ng-if="deadline != vm.select">{{deadline.name}}</td>
+						                    <td ng-if="deadline == vm.select">
+						                        <input type="text" class="form-control" name="name" id="field_name"  value="{{deadline.name}}"
+			                                    ng-model="vm.editData.name" />
+						                    </td>
+
+
+						                    <td ng-if="deadline != vm.select">{{deadline.percentage}} %</td>
+						                    <td ng-if="deadline == vm.select">
+						                    	<input type="range" min="0" max="{{100-vm.crtPercent + deadline.percentage}}" value="50" step="1" ng-model="vm.editData.percentage"  class="form-control" name="percentage" value="{{deadline.percentage}}">
+
+						                    	{{vm.editData.percentage}} %
+						                        
+						                    </td>
+			            
+						                    <td>{{(vm.total - vm.quotation.commercial_percentage)/100 * vm.total * (deadline.percentage/100) |  limitTo:4 }} €</td>
+						                    
+						                    <td class="text-right">
+						                        <div ng-if="deadline != vm.select" class="btn-group flex-btn-group-container">
+						                            <button type="submit"
+						                                    ng-click="vm.selectElement(deadline, vm.editData)"
+						                                    class="btn btn-edit" ng-show="[1,3].indexOf(vm.quotation.state)!=-1">
+						                                <span class="glyphicon glyphicon-pencil"></span>
+						                                <span class="hidden-xs hidden-sm" >Editer</span>
+						                            </button>
+						                            <button type="submit"
+						                                    ng-click="vm.removeDeadline(deadline)"
+						                                    class="btn btn-delete" ng-show="[1,3].indexOf(vm.quotation.state)!=-1">
+						                                <span class="hidden-xs hidden-sm">Supprimer</span>
+						                            </button>
+						                        </div>
+
+						                         <div ng-if="deadline == vm.select" class="btn-group flex-btn-group-container">
+						                             <button type="submit"
+						                                   ng-click="vm.select=-1"
+						                                    class="btn btn-danger btn-sm" style="min-width:90px" ng-show="[1,3].indexOf(vm.quotation.state)!=-1">
+						                                <span class="hidden-xs hidden-sm">Annuler</span>
+						                            </button>
+						                             <button type="submit"
+						                                    ng-click="vm.saveDeadline(vm.editData)"
+						                                    class="btn btn-success btn-sm" style="min-width:90px" ng-show="[1,3].indexOf(vm.quotation.state)!=-1">
+						                                <span class="hidden-xs hidden-sm">Valider</span>
+						                            </button>
+						                        </div>
+
+						                    </td>
+						                </tr>
+
+
+
+						                <!-- Ajout d'un produit -->
+
+						                <tr>
+						                    <td>
+						                    	<div class="input-group">
+										    		{{vm.addData.date | date: 'yyyy-MM-dd'}}
+										    		<button ng-click="openDatePicker(vm.addData)">Choisir une date</button>
+								                </div>
+						                    </td>
+
+
+
+
+
+
+						                    <td><input ng-model="vm.addData.name" type="text" class="form-control input--form" /></td>
+
+						                    <td><input type="range" min="0" max="{{100 - vm.crtPercent}}" value="0" step="1" ng-model="vm.addData.percentage"  class="form-control" name="percentage">
+
+						                    	{{vm.addData.percentage}} %
+						                    	</td>
+
+
+						                    <td>{{(vm.total - vm.quotation.commercial_percentage)/100 * vm.total * (vm.addData.percentage/100) |  limitTo:4}} €</td>
+						                    <td class="text-right">
+						                        <div class="btn-group flex-btn-group-container">
+						                            <button
+						                            		ng-click="vm.addDeadline()"
+						                                    class="btn btn-edit" ng-show="[1,3].indexOf(vm.quotation.state)!=-1">
+						                                <span class="hidden-xs hidden-sm">Ajouter</span>
+						                            </button>
+						                        </div>
+						                    </td>
+						                </tr>
+
+						            </tbody>
+						        </table>
+					        </div>
+					    </div>
 				</div>
+
 	</ion-content>
 </ion-view>
 

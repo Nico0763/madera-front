@@ -105,8 +105,6 @@
         {
 
                 vm.select.name = data.name;
-            
-                console.debug(vm.select);
                 Product.update(vm.select, function(success){
                         console.debug(success);
                     }, function(error) {

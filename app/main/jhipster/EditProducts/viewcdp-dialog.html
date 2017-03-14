@@ -1,0 +1,24 @@
+<ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
+    <ion-content>
+        <div class="main-title">Coupe de principe - {{vm.principal_cross_section.name}}</div>
+        <div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+
+        <div class="row">
+            <div class="col col-80 col-offset-10">
+            <div class="box--pattern-img">  
+                <img src="{{CLOUNDINARY_URL}}{{vm.principal_cross_section.url}}" />
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col col-80 col-offset-10">
+               <p style="text-align:center">{{vm.principal_cross_section.description}}
+               </p>
+        </div>
+        </div>
+
+
+
+    </ion-content>
+</ion-view>
+

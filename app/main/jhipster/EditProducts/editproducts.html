@@ -17,8 +17,9 @@
 						                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
 						                    <th jh-sort-by="module"><span>Module</span> <span class="glyphicon glyphicon-sort"></span></th>
 						                    <th><span>Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
+						                    <th><span>CDP</span> <span class="glyphicon glyphicon-sort"></span></th>
 						                    <th><span>Angles et longueurs</span> <span class="glyphicon glyphicon-sort"></span></th>
-						                    <th></th>
+						                    <th ng-show="[1,3].indexOf(vm.quotation.state)!=-1"></th>
 
 						                </tr>
 						            </thead>
@@ -29,10 +30,20 @@
 						                <tr ng-repeat="product in vm.products track by product.id">
 						                    <td>{{product.module.name}}</td>
 
+						                    
+
 						                    <td ng-if="product != vm.select">{{product.name}}</td>
 						                    <td ng-if="product == vm.select">
 						                        <input type="text" class="form-control" name="name" id="field_name"  value="{{product.name}}"
 			                                    ng-model="vm.editData.name" />
+						                    </td>
+
+						                    <td>
+						                   		 <button class="btn btn-select" ui-sref="viewcdp({id_cdp:product.module.principal_cross_section.id})" ng-show="product.module.principal_cross_section">
+						                    		Visualiser
+						                    	</button>
+
+
 						                    </td>
 
 
@@ -42,7 +53,7 @@
 						                    		Sélectionner
 						                    	</button>
 						                    </td>
-						                    <td class="text-right">
+						                    <td class="text-right" ng-show="[1,3].indexOf(vm.quotation.state)!=-1">
 						                        <div ng-if="product != vm.select" class="btn-group flex-btn-group-container">
 						                            <button type="submit"
 						                                    ng-click="vm.selectElement(product, vm.editData)"
@@ -77,7 +88,7 @@
 
 						                <!-- Ajout d'un produit -->
 
-						                <tr>
+						                <tr ng-show="[1,3].indexOf(vm.quotation.state)!=-1">
 						                    <td>
 						                    	<button class="btn btn-select" ui-sref="choosemodule">
 						                    		<span ng-show="vm.newProduct.module == null">Sélectionner</span>
@@ -90,6 +101,7 @@
 
 
 						                    <td><input ng-model="vm.newProduct.name" type="text" class="form-control input--form" /></td>
+						                    <td></td>
 						                    <td></td>
 						                    <td class="text-right">
 						                        <div class="btn-group flex-btn-group-container">

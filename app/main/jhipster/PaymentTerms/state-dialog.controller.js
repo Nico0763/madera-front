@@ -5,9 +5,9 @@
         .module('main')
         .controller('StateDialogController', StateDialogController);
 
-    StateDialogController.$inject = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'GetCustomers', '$ionicConfig', '$state','ParseLinks', 'Quotation', '$ionicLoading', '$rootScope', '$uibModalInstance', '$ionicPopup'];
+    StateDialogController.$inject = ['$timeout', '$scope', '$stateParams', 'DataUtils', 'GetCustomers', '$ionicConfig', '$state','ParseLinks', 'Quotation', '$ionicLoading', '$rootScope', '$uibModalInstance', '$ionicPopup', 'Commands_push', 'SumDeadlines'];
 
-    function StateDialogController ($timeout, $scope, $stateParams, DataUtils, GetCustomers,  $ionicConfig, $state,ParseLinks, Quotation, $ionicLoading, $rootScope, $uibModalInstance, $ionicPopup) {
+    function StateDialogController ($timeout, $scope, $stateParams, DataUtils, GetCustomers,  $ionicConfig, $state,ParseLinks, Quotation, $ionicLoading, $rootScope, $uibModalInstance, $ionicPopup, Commands_push, SumDeadlines) {
         var vm = this;
          //A appeler dans les autre state pour réactiver la transition
         $ionicConfig.views.transition('none');
@@ -28,34 +28,51 @@
         $scope.state = vm.quotation.state;
 
         var modalInstance = $uibModalInstance;
-        /*$ionicPopup.alert({
-                 title: 'Impossible de changer l\'état',
-                 template: 'Votre devis n\'est lié à aucun client'
-               });*/
         
     
 
       
         function selectState(state)
         {
-            $ionicLoading.show({
-              template: 'Loading...'
-            })
+            
             //Actions à effectuer selon les choix
-            if(state == 5)
+            if(state ==2)
+            {
+                $ionicLoading.show({
+                  template: 'Loading...'
+                })
+                SumDeadlines.get({id:vm.quotation.id}, function(data)
+                {
+                    if(data.value >= 100)
+                    {
+                         $ionicLoading.show({
+                          template: 'Loading...'
+                        })
+                        vm.quotation.state = state;
+                        updateQuotation();
+                    }
+                    else
+                    {
+                        $ionicLoading.hide();
+                        alert("Les deadlines ne sont pas égales à 100 %");
+                    
+                    }
+                }
+                ,function()
+                {
+                    $ionicLoading.hide();
+                })
+            }
+            else if(state == 5)
                 pushOrders();
             else
             {
+                $ionicLoading.show({
+                  template: 'Loading...'
+                })
                 vm.quotation.state = state;
                 updateQuotation();
             }
-
-
-
-            
-           
-            
-           
         }
 
         function updateQuotation()
@@ -81,16 +98,24 @@
         {//Lance les commandes aux fournisseurs
             if(vm.quotation.customer == null)
             {
-                 $ionicLoading.hide();
-                $ionicPopup.alert({
-                 title: 'Impossible de changer l\'état',
-                 template: 'Votre devis n\'est lié à aucun client'
-               });
+                alert('Votre devis n\'est lié à aucun client');
             }
             else
             {
+                $ionicLoading.show({
+                  template: 'Loading...'
+                })
                 //Appeler service de push orders;
-                
+                Commands_push.update({id:vm.quotation.id}, function()
+                {
+                    vm.quotation.state = 5;
+                    updateQuotation();
+                },
+                function()
+                {
+                    $ionicLoading.hide();
+                }); 
+
             }
 
         }

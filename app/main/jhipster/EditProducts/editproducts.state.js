@@ -119,6 +119,37 @@
                       //  $state.go('editproject');
                     });
                 }]
+            })
+            .state('viewcdp', {
+                parent: 'editproducts',
+                url: '/{id_cdp}/viewcdp',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+               
+                cache:false,
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'main/jhipster/EditProducts/viewcdp-dialog.html',
+                        controller: 'ViewCdpDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                                $translatePartialLoader.addPart('global');
+                                return $translate.refresh();
+                            }],
+                            entity: ['Principal_cross_section', function(Principal_cross_section) {
+                                return Principal_cross_section.get({id : $stateParams.id_cdp}).$promise;
+                            }]
+                        }
+                    }).result.then(function() {
+                      //  $state.go('editproject');
+                    }, function() {
+                      //  $state.go('editproject');
+                    });
+                }]
             });
 	}
 })();

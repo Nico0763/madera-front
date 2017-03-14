@@ -15,7 +15,7 @@
                                       <th jh-sort-by="module"><span>Unité d'usage</span> <span class="glyphicon glyphicon-sort"></span></th>
                                     <th jh-sort-by="module"><span>Longueur</span> <span class="glyphicon glyphicon-sort"></span></th>
                                   
-                                    <th></th>
+                                    <th ng-show="[1,3].indexOf(vm.quotation.state)!=-1"></th>
                                    
                                 </tr>
                         </thead>
@@ -60,7 +60,7 @@
 
 
                     
-                    <td class="text-right">
+                    <td class="text-right" ng-show="[1,3].indexOf(vm.quotation.state)!=-1">
                         <div ng-if="cp != vm.select" class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ng-click="vm.selectElement(cp, vm.editData)"

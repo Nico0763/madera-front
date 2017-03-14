@@ -85,10 +85,8 @@
             $ionicLoading.show({
               template: 'Loading...'
             })
-			console.debug(vm.quotation);
             Quotation.update(vm.quotation,function (data)
             {
-            	console.debug(data);
                 $rootScope.quotation = data;
                 $ionicLoading.hide();
                 $state.go('indexquotation');
