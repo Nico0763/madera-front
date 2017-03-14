@@ -1,13 +1,17 @@
 .madera--table
 {
-    th 
+    th
     {
-    	background-color:$color-madera!important;
+    	background-color:$color-madera !important;
+      border-color: $color-madera !important;
     }
     td
     {
     	border-color: $color-madera!important;
     	color : $color-madera!important;
     }
+  	#th-tools {
+  		width: 195px !important;
+  	}
 
 }
