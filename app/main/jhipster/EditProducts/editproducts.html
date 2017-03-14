@@ -38,7 +38,7 @@
 
 
 						                    <td>
-						                    	<button class="btn btn-edit" ui-sref="configproduct({id_product:product.id})">
+						                    	<button class="btn btn-select" ui-sref="configproduct({id_product:product.id})">
 						                    		Sélectionner
 						                    	</button>
 						                    </td>
@@ -46,13 +46,13 @@
 						                        <div ng-if="product != vm.select" class="btn-group flex-btn-group-container">
 						                            <button type="submit"
 						                                    ng-click="vm.selectElement(product, vm.editData)"
-						                                    class="edit btn-edit">
+						                                    class="btn btn-edit">
 						                                <span class="glyphicon glyphicon-pencil"></span>
 						                                <span class="hidden-xs hidden-sm" >Editer</span>
 						                            </button>
 						                            <button type="submit"
 						                                    ng-click="vm.removeProduct(product)"
-						                                    class="delete btn-delete">
+						                                    class="btn btn-delete">
 						                                <span class="hidden-xs hidden-sm">-</span>
 						                            </button>
 						                        </div>
@@ -79,7 +79,7 @@
 
 						                <tr>
 						                    <td>
-						                    	<button class="btn btn-edit" ui-sref="choosemodule">
+						                    	<button class="btn btn-select" ui-sref="choosemodule">
 						                    		<span ng-show="vm.newProduct.module == null">Sélectionner</span>
 						                    		<span ng-show="vm.newProduct.module != null">{{vm.newProduct.module.name}}</span>
 						                    	</button>
