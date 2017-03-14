@@ -1,0 +1,31 @@
+<ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
+    <ion-content>
+            <div class="main-title">Changer l'état du devis</div>
+            <div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+                <!--<div class="row text-center">
+                    <div>
+                        <h1>Choix du devis</h1>
+                        <h3>MADERA</h3>
+                    </div>
+                </div>-->
+                <jhi-alert-error></jhi-alert-error>
+                
+                <div class="row">
+                        <div class="col col-80 col-offset-10">
+
+                            <button ng-click="vm.selectState(1)" class="btn btn--default" ng-show="[2, 3].indexOf(state)!=-1" style="margin-top: 10px;">Brouillon</button>
+
+                            <button ng-click="vm.selectState(2)" class="btn btn--default" ng-show="[1, 3].indexOf(state)!=-1" style="margin-top: 10px;">Accepter le devis</button>
+                            <button ng-show="[1, 2].indexOf(state)!=-1" ng-click="vm.selectState(3)" class="btn btn--default" style="margin-top: 10px;">Mettre en attente</button>
+                            <button ng-show="[1, 2, 3].indexOf(state)!=-1" ng-click="vm.selectState(4)" class="btn btn--default" style="margin-top: 10px;">Refuser</button>
+                            <button ng-show="[2].indexOf(state)!=-1" ng-click="vm.selectState(5)" class="btn btn--default" style="margin-top: 10px;">Passer en commande</button>
+                            <button ng-show="[5].indexOf(state)!=-1" ng-click="vm.selectState(6)" class="btn btn--default" style="margin-top: 10px;">Passer en facturation</button>
+                            <button ng-show="[6].indexOf(state)!=-1" ng-click="vm.selectState(7)" class="btn btn--default" style="margin-top: 10px;">Finaliser le paiement</button>
+                            
+                        </div>
+                    </div>
+
+
+    </ion-content>
+</ion-view>
+

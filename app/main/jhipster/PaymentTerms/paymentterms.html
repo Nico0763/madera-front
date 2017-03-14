@@ -1,0 +1,13 @@
+<ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
+	<ion-content>
+			<div class="main-title">#{{vm.quotation.reference}} - Modalités de paiement</div>
+			<div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+		  			<div class="row">
+					    <label class="control-label label--form col col-40 col-offset-10" for="field_date">État</label>
+					    <div class="col col-40">
+								<button ng-click="vm.chooseState()" class="btn btn--default" style="margin-top: 10px;">Changer l'état</button>
+					    </div>
+				</div>
+	</ion-content>
+</ion-view>
+

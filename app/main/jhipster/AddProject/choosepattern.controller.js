@@ -105,6 +105,7 @@ console.log(reference);
             $rootScope.quotation.reference = reference;
             if(vm.crtPattern == null)
             {
+                $rootScope.quotation.state = 1;
                 Quotation.save($rootScope.quotation, successSave, errorSave);
             }
             else
@@ -115,7 +116,7 @@ console.log(reference);
                         date:$rootScope.quotation.date,
                         name:$rootScope.quotation.name,
                         customer:$rootScope.quotation.customer,
-                        state:0,
+                        state:1,
                         assortment:$rootScope.quotation.assortment,
                         commercial_percentage:0
                     },

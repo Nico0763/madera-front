@@ -107,7 +107,7 @@
 
 
 	        	cordova.plugins.printer.print(vm.html, { duplex: 'long' }, function (res) {
-	                alert(res ? 'Done' : 'Canceled');
+	               	
 		    					});
 	        }
         }
@@ -160,7 +160,7 @@
 
 
         	cordova.plugins.printer.print(html, { duplex: 'long' }, function (res) {
-                alert(res ? 'Done' : 'Canceled');
+                
             });
         }
 

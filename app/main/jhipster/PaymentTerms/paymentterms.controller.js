@@ -3,14 +3,14 @@
 	'use strict';
 	angular
 		.module('main')
-		.controller('IndexQuotationController', IndexQuotationController);
+		.controller('PaymentTermsController', PaymentTermsController);
 
 	/**
 	 * Function who inject module for Angular
 	 * @type {Array}
 	 */
-	IndexQuotationController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope','ParseLinks','$ionicConfig'];
-
+	PaymentTermsController.$inject = ['$scope', '$filter', 'Principal', '$state', '$location', '$ionicNavBarDelegate', 'Config', '$ionicSideMenuDelegate', '$rootScope','ParseLinks','$ionicConfig'];
+ 
 	/**
 	 * The index page controller 
 	 * @param {[type]} $scope                 Scope module
@@ -27,12 +27,33 @@
 	 * @param {[type]} GetTours               GetTours service
 	 * @param {[type]} $ionicLoading          IonicLoading module
 	 */ 
-	function IndexQuotationController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope,  ParseLinks, $ionicConfig)
+	function PaymentTermsController($scope, $filter, Principal, $state, $location, $ionicNavBarDelegate, Config, $ionicSideMenuDelegate, $rootScope,  ParseLinks, $ionicConfig)
 	{
 		///////////////
 		// VARIABLES //
 		///////////////
-
+		$scope.states = [{
+        value: 1,
+        label: 'Brouillon'
+      }, {
+        value: 2,
+        label: 'Accepté'
+      }, {
+        value: 3,
+        label: 'En attente'
+      }, {
+        value: 4,
+        label: 'Refusé'
+      }, {
+        value: 5,
+        label: 'En commande'
+      }, {
+        value: 6,
+        label: 'Transfert en facturation'
+      }, {
+        value: 7,
+        label: 'Terminé'
+      }];
 
 
         //A appeler dans les autre state pour réactiver la transition
@@ -47,42 +68,20 @@
 		 * @type {Object}
 		 */
 		var vm = this;
-		console.debug($rootScope.quotation);
         vm.quotation = $rootScope.quotation;
 
         vm.goBack = goBack;
-         vm.editProject = editProject;
-         vm.editProducts = editProducts;
-         vm.printProject = printProject;
-         vm.paymentTerms = paymentTerms;
+        vm.chooseState = chooseState;
+        vm.html = "";
 
         function goBack()
         {
-            $state.go('indexpage');
+            $state.go("indexquotation");
         }
 
-       
-
-        function editProject()
+        function chooseState()
         {
-        	$state.go("editproject", null, {reload: true});
+        	$state.go("choosestate");
         }
-
-        function editProducts()
-        {
-        	$state.go("editproducts",null, {reload:true});
-        }
-
-        function printProject()
-        {
-        	$state.go("printproject",null, {reload:true});
-        }
-
-        function paymentTerms()
-        {
-        	$state.go("paymentterms", null, {reload:true});
-        }
-
-
 	}
 })();
