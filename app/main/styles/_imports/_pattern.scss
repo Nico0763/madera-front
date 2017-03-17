@@ -1,7 +1,6 @@
 .box--pattern
 {
 	bot:20px;
-   border: 2px solid $color-blue-dark;
    height:100%;
 
    .box--pattern-title
@@ -25,6 +24,8 @@
    			display:block;
    			margin:auto;
    			height:100%;
+				border: 3px solid white;
+				box-shadow: 3px 3px 5px #000;
    		}
    }
 }
