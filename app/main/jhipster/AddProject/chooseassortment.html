@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
     <ion-content>
             <div class="main-title">Choix de la gamme</div>
-            <div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+            <div class="return"><button ng-click="vm.goBack()" class="btn btn--return">Retour</div>
                 <!--<div class="row text-center">
                     <div>
                         <h1>Choix du devis</h1>
@@ -17,11 +17,11 @@
                 <div class="row">
                         <div class="col col-50">
                             <div class="table-responsive">
-                                 <table class="index-table">
+                                 <table class="madera--table index-table">
                                     <thead>
                                         <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                                             <th jh-sort-by="name"><span>Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
-                                          
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -34,7 +34,7 @@
                     </div>
                      <div class="col col-50">
                             <div class="table-responsive">
-                             <table class="index-table">
+                             <table class="madera--table index-table">
                                 <thead>
                                     <tr>
                                         <th><span ng-click="console.debug(vm.currentAssortment);">{{vm.currentAssortment.name}}</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -42,7 +42,7 @@
                                 </thead>
                                  <tbody>
                                 <tr>
-                                <td>      
+                                <td>
                                     Finition extérieure : {{vm.currentAssortment.finition_ext.name}}<img class="assortment--img" src="{{CLOUNDINARY_URL}}{{vm.currentAssortment.finition_ext.url}}" /><br/>
                                     Type d'isolation : {{vm.currentAssortment.insulating_type.name}}<br/>
                                     Type de couverture : {{vm.currentAssortment.cover_type.name}}<img class="assortment--img" src="{{CLOUNDINARY_URL}}{{vm.currentAssortment.cover_type.url}}" /><br/>
@@ -54,7 +54,7 @@
                                 </tbody>
                                 </table>
                                 </div>
-                                
+
                      </div>
                 </div>
 
@@ -67,4 +67,3 @@
 
     </ion-content>
 </ion-view>
-
