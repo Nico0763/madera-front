@@ -106,15 +106,12 @@
 
 
 
-
-	        	cordova.plugins.printer.print(vm.html, { duplex: 'long' }, function (res) {
+	    			//Si l'impression ne marche pas, enlever le plugin crosswalk (incompatibilité) puis le réajouter (Probème avec la platform android)
+		        	cordova.plugins.printer.print(vm.html, { name: 'Dossier Technique', printerId: null }, function (res) {
 	               	
 		    					});
 	        }
         }
-
-
-
 
         vm.printQuotation = printQuotation;
         function printQuotation()
@@ -160,7 +157,7 @@
         	html += "</html>"
 
 
-        	cordova.plugins.printer.print(html, { duplex: 'long' }, function (res) {
+        	cordova.plugins.printer.print(html, { name: 'Devis', printerId: null }, function (res) {
                 
             });
         }

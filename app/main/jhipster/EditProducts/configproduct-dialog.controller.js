@@ -35,6 +35,7 @@
          */
          vm.save = save;
         vm.product = entity;
+        vm.quotation = $rootScope.quotation;
 
         //Méthodes
         

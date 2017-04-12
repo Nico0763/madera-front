@@ -72,10 +72,13 @@
 		vm.datePickerOpenStatus = {};
         vm.quotation = $rootScope.quotation;
         vm.total = 0;
+        vm.totalCommercial = 0;
         vm.crtPercent = 0;
         TotalQuotation.get({id:vm.quotation.id},function(data)
         	{
         		vm.total = data.value;
+                vm.totalCommercial = (vm.total - vm.quotation.commercial_percentage/100 * vm.total);
+
         	});
 
         vm.deadlines = GetDeadlinesByQuotation.query({id:vm.quotation.id},function()
@@ -123,12 +126,14 @@
         	Quotation.update(vm.quotation, function(data)
         	{
         		$rootScope.quotation = data;
-
+                vm.quotation = $rootScope.quotation;
                 $ionicLoading.hide();
                 $ionicPopup.alert({
                 	title:'Enregistrement effectué',
      				template: 'Le pourcentage commercial a été mis à jour'
                 });
+                vm.totalCommercial = (vm.total - vm.quotation.commercial_percentage/100 * vm.total);
+
         	},
         	function()
         	{

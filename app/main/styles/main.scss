@@ -1,5 +1,6 @@
  @import "_variables.scss";
 @import "_imports/loginpage";
+@import "_imports/indexquotation";
 @import "_imports/indexpage";
 @import "_imports/assortmentselecter";
 @import "_imports/pattern";
@@ -11,6 +12,7 @@
 @import "_imports/_components/buttons";
 @import "_imports/_components/titles";
 @import "_imports/_components/table";
+@import "_imports/_components/ranges";
 
 /* start Password strength bar style */
 ul#strength {
@@ -20,6 +22,15 @@ ul#strength {
   margin-left:15px;
   padding:0;
   vertical-align:2px;
+}
+
+#container--3d
+{
+  height: 650px;
+  width: 650px;
+  margin:0 auto;
+  display:table;
+  top: calc(50% - 325px);
 }
 
 .point {

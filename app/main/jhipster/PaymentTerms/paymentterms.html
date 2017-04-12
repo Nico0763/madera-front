@@ -42,7 +42,7 @@
 					<div class="row">
 						    <label class="control-label label--form col col-40 col-offset-10">Montant réduit</label>
 
-						    <label class="control-label label--form col col-40">{{vm.total - vm.quotation.commercial_percentage/100 * vm.total}} €</label>
+						    <label class="control-label label--form col col-40">{{vm.totalCommercial}} €</label>
 						    
 						</div>
 
@@ -96,8 +96,8 @@
 						                    	{{vm.editData.percentage}} %
 						                        
 						                    </td>
-			            
-						                    <td>{{(vm.total - vm.quotation.commercial_percentage)/100 * vm.total * (deadline.percentage/100) |  limitTo:4 }} €</td>
+			            					
+						                    <td>{{vm.totalCommercial * (deadline.percentage/100)}} €</td>
 						                    
 						                    <td class="text-right">
 						                        <div ng-if="deadline != vm.select" class="btn-group flex-btn-group-container">
@@ -149,13 +149,14 @@
 
 						                    <td><input ng-model="vm.addData.name" type="text" class="form-control input--form" /></td>
 
-						                    <td><input type="range" min="0" max="{{100 - vm.crtPercent}}" value="0" step="1" ng-model="vm.addData.percentage"  class="form-control" name="percentage">
+						                    <td>
+						                    <input type="range" min="0" max="{{100 - vm.crtPercent}}" value="0" step="1" ng-model="vm.addData.percentage"  class="form-control" name="percentage">
 
 						                    	{{vm.addData.percentage}} %
 						                    	</td>
 
 
-						                    <td>{{(vm.total - vm.quotation.commercial_percentage)/100 * vm.total * (vm.addData.percentage/100) |  limitTo:4}} €</td>
+						                    <td>{{vm.totalCommercial * (vm.addData.percentage/100)}} €</td>
 						                    <td class="text-right">
 						                        <div class="btn-group flex-btn-group-container">
 						                            <button
