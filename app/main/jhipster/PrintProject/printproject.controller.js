@@ -53,6 +53,8 @@
         vm.goBack = goBack;
         vm.html = "";
 
+   
+
         function goBack()
         {
             $state.go("indexquotation");
@@ -101,7 +103,6 @@
 	    					{ //fin
 
 	    							vm.html += "</html>"
-
 
 
 

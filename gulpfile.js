@@ -5,6 +5,7 @@ var requireDir = require('require-dir');
 var chalk = require('chalk');
 var fs = require('fs');
 
+
 // config
 var paths = gulp.paths = {
   bowerComponents: 'app/bower_components',

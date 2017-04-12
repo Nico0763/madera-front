@@ -67,6 +67,9 @@
     ]
   },
   "dependencies": {
-    "datepicker-for-ionic": "^1.1.7"
+    "@ionic-native/printer": "^3.4.4",
+    "datepicker-for-ionic": "^1.1.7",
+    "three": "^0.84.0",
+    "three-orbitcontrols": "^1.1.2"
   }
 }

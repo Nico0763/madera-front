@@ -1,0 +1,232 @@
+<ion-view hide-nav-bar="true"  hide-back-button="true" view-title="{{'global.menu.indexpage' | translate}}">
+	<ion-content>
+			<div class="main-title">Visualisation 3D</div>
+			<div class="return"><button ng-click="vm.goBack()" class="btn btn--red btn--return">Retour</div>
+			<div id="container--3d"></div>
+
+			<script src="main/assets/js/three.min.js"></script>
+			<script src="main/assets/js/OrbitControls.js"></script>
+    	<script>
+
+
+var ChristmasTree = function() {
+
+    THREE.Group.apply(this, arguments);
+
+
+    // A material for the pot
+    var potMaterial = new THREE.MeshStandardMaterial( {
+        color: 0xf97514,
+        shading: THREE.FlatShading,
+        metalness: 0,
+        roughness: 0.8,
+        refractionRatio: 0.25
+    } );
+
+    // The pot
+    var pot = new THREE.Mesh(
+        addNoise(new THREE.CylinderGeometry(30, 25, 35, 8, 2), 2),
+        potMaterial
+    );
+    pot.position.y += 17.5;
+    pot.castShadow = true;
+    pot.receiveShadow = true;
+    this.add(pot);
+    var potRim = new THREE.Mesh(
+        addNoise(new THREE.CylinderGeometry(38, 35, 10, 8, 1), 2),
+        potMaterial
+    );
+    potRim.position.y += 35;
+    potRim.castShadow = true;
+    potRim.receiveShadow = true;
+    this.add(potRim);
+
+    // A tree trunk
+    var trunk = new THREE.Mesh(
+        addNoise(new THREE.CylinderGeometry(12, 18, 30, 8, 3),2),
+        new THREE.MeshStandardMaterial( {
+            color: 0x713918,
+            shading: THREE.FlatShading ,
+            metalness: 0,
+            roughness: 0.8,
+            refractionRatio: 0.25
+        } )
+    );
+    trunk.position.y += 45;
+    trunk.castShadow = true;
+    trunk.receiveShadow = true;
+    this.add(trunk);
+
+    // A shape, 
+    var logo = new THREE.Shape();
+    logo.moveTo(3.43, 96.86);
+    logo.bezierCurveTo(2.01, 96.86, 1.38, 95.87, 2.04, 94.63);
+    logo.lineTo (9.07, 83.43);
+    logo.bezierCurveTo(9.72, 82.2, 11.42, 81.2, 12.84, 81.2);
+    logo.lineTo (67.94, 81.2);
+    logo.bezierCurveTo(69.37, 81.2 , 70, 80.2, 69.34, 78.97);
+    logo.lineTo (41.58, 24.87);
+    logo.bezierCurveTo(40.92, 23.64, 40.92, 21.65, 41.58, 20.41);
+    logo.lineTo (49.44, 5.66);
+    logo.bezierCurveTo(49.44+0.65, 5.66-1.23, 49.44+1.72, 5.66-1.23, 51.82, 5.66);
+    logo.lineTo (99.22,94.63);
+    logo.bezierCurveTo(99.22+0.65, 94.63+1.23, 99.22+0.02, 94.63+2.23, 97.82, 96.86);
+
+    var extrudeSettings = {
+        steps: 1,
+        amount: 16,
+        curveSegments: 1,
+        bevelEnabled: true,
+        bevelThickness: 5,
+        bevelSize: 5,
+        bevelSegments: 1
+    };
+
+    var treeGroup = new THREE.Group();
+
+    var logoGeometry = new THREE.ExtrudeGeometry( logo, extrudeSettings );
+    addNoise(logoGeometry, 2,2,0.5)
+    var mesh = new THREE.Mesh( logoGeometry, new THREE.MeshStandardMaterial( {
+            color: 0x15a46b,
+            shading: THREE.FlatShading ,
+            metalness: 0,
+            roughness: 0.8,
+            refractionRatio: 0.25
+        } ) ) ;
+
+    treeGroup.add( mesh );
+
+
+    treeGroup.position.y += 180;
+    treeGroup.position.x -= 60;
+    treeGroup.position.z += 10;
+    treeGroup.rotateZ(Math.PI);
+    treeGroup.rotateY(Math.PI);
+    treeGroup.scale.set(1.2,1.2,1.2);
+
+    this.add(treeGroup);
+}
+ChristmasTree.prototype = Object.create(THREE.Group.prototype);
+ChristmasTree.prototype.constructor = ChristmasTree;
+ChristmasTree.prototype.updatePosition = function() {
+};
+
+
+
+
+
+// Create a scene which will hold all our meshes to be rendered
+var scene = new THREE.Scene();
+
+// Create and position a camera
+var camera = new THREE.PerspectiveCamera(
+    70,                                   // Field of view
+    window.innerWidth/window.innerHeight, // Aspect ratio
+    0.1,                                  // Near clipping pane
+    1000                                  // Far clipping pane
+);
+
+// Reposition the camera
+camera.position.set(-60,80,210);
+
+// Point the camera at a given coordinate
+camera.lookAt(new THREE.Vector3(0,80,0))
+
+// Create a renderer
+var renderer = new THREE.WebGLRenderer({ antialias: true });
+
+// Size should be the same as the window
+renderer.setSize( window.innerWidth, window.innerHeight );
+
+// Set a near white clear color (default is black)
+renderer.setClearColor( 0xfff6e6 );
+
+// Enable shadow mapping
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+// Append to the document
+document.getElementById("container--3d").appendChild( renderer.domElement );
+
+// Add an ambient lights
+var ambientLight = new THREE.AmbientLight( 0xffffff, 0.3 );
+scene.add( ambientLight );
+
+// Add a point light that will cast shadows
+var pointLight = new THREE.PointLight( 0xffffff,.8 );
+pointLight.position.set( 80, 160, 120 );
+scene.add( pointLight );
+
+
+// Add the tree
+var tree = new ChristmasTree();
+scene.add(tree);
+
+
+
+// Add an orbit control which allows us to move around the scene. See the three.js example for more details
+// https://github.com/mrdoob/three.js/blob/dev/examples/js/controls/OrbitControls.
+var controls = new THREE.OrbitControls( camera, renderer.domElement );
+controls.target = new THREE.Vector3(0,80,0);
+controls.maxPolarAngle = Math.PI / 2;
+controls.minDistance = 100;
+controls.maxDistance = 220;
+
+requestAnimationFrame(render);
+
+function render() {
+    controls.update();
+
+    // Update animated elements
+    tree.updatePosition();
+
+    // Render the scene/camera combnation
+    renderer.render(scene, camera);
+
+    // Repeat...
+    requestAnimationFrame(render);
+}
+
+/**
+ * Helper function to add random noise to geometry vertixes
+ *
+ * @param geometry The geometry to alter
+ * @param noiseX Amount of noise on the X axis
+ * @param noiseY Amount of noise on the Y axis
+ * @param noiseZ Amount of noise on the Z axis
+ * @returns the geometry object
+ */
+function addNoise(geometry, noiseX, noiseY, noiseZ) {
+
+    var noiseX = noiseX || 2;
+    var noiseY = noiseY || noiseX;
+    var noiseZ = noiseZ || noiseY;
+
+    for(var i = 0; i < geometry.vertices.length; i++){
+        var v = geometry.vertices[i];
+        v.x += -noiseX / 2 + Math.random() * noiseX;
+        v.y += -noiseY / 2 + Math.random() * noiseY;
+        v.z += -noiseZ / 2 + Math.random() * noiseZ;
+    }
+
+    return geometry;
+}
+
+function addShapeNoise(shapes, noiseX, noiseY) {
+
+    var noiseX = noiseX || 2;
+    var noiseY = noiseY || noiseX;
+
+    for(var i = 0; i < shapes.length; i++){
+        var v = shapes[i];
+        v.x += -noiseX / 2 + Math.random() * noiseX;
+        v.y += -noiseY / 2 + Math.random() * noiseY;
+        shapes[i] = v;
+    }
+
+    return shapes;
+}
+    	</script>
+		  			
+	</ion-content>
+</ion-view>

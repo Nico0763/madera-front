@@ -55,6 +55,7 @@
          vm.editProducts = editProducts;
          vm.printProject = printProject;
          vm.paymentTerms = paymentTerms;
+         vm.view3d = view3d;
 
         function goBack()
         {
@@ -83,6 +84,10 @@
         	$state.go("paymentterms", null, {reload:true});
         }
 
+        function view3d()
+        {
+        	$state.go("view3d", null, {reload:true});
+        }
 
 	}
 })();
